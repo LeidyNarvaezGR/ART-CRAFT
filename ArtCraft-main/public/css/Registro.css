@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #731A04; 
+  overflow-x: hidden;
+}
+
+.registro {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.registro h1 {
+  color: #f4efef; 
+  font-size: 38px;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.formulario {
+  background: #480000; 
+  width: 80%;          
+  max-width: 950px;    
+  margin: 0 auto;      
+  padding: 45px;
+  border-radius: 12px;
+  text-align: left;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.formulario label {
+  display: block;
+  margin-top: 20px;
+  color: #ffffff;     
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.formulario input, 
+.formulario select {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #ffffff; 
+  color: #333;         
+  font-size: 16px;
+  outline: none;
+}
+
+.formulario input:focus {
+  border: 2px solid #ffa500;
+}
+
+.formulario input::placeholder {
+  color: #aaa;
+}
+
+.formulario button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 35px;
+  background: #ffa500;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.formulario button:hover {
+  background: #e69500;
+  transform: translateY(-2px);
+}
+
+.formulario p {
+  text-align: center;
+  margin-top: 25px;
+  color: #ffffff; 
+  font-size: 16px;
+}
+
+.formulario p a {
+  color: #ffa500; 
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.formulario p a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .formulario {
+    width: 95%;
+    padding: 25px;
+  }
+}
+
+.footer {
+  width: 100%;
+  height: 90px;
+  background: linear-gradient(to bottom, #b13200, #7b1900);
+  margin-top: 56px;
+}
+
+@media (max-width: 700px) {
+  .formulario {
+    width: 95%;
+    padding: 25px;
+  }
+}
+
+@media screen and (max-width:900px){
+
+    .pie-pagina .grupo-1{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .pie-pagina .red-social{
+        justify-content: center;
+}
+}

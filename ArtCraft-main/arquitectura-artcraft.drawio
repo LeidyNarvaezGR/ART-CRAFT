@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" agent="ArtCraft" version="24.7.5" type="device">
+  <diagram id="arquitectura-artcraft" name="Arquitectura Web y Movil con API">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="890" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="titulo" value="Arquitectura del sistema &#8212; Art Craft (Web + Móvil vía API)" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fillColor=none;strokeColor=none;fontColor=#4A1C0C;" vertex="1" parent="1">
+          <mxGeometry x="60" y="20" width="1050" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b1" value="1. CAPA CLIENTE &#8212; quién compra" style="rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#d5e8d4;strokeColor=#82b366;dashed=1;verticalAlign=top;align=left;fontSize=14;fontStyle=1;fontColor=#4C6B22;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="75" width="1050" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="web" value="&lt;b&gt;Web (navegador)&lt;/b&gt;&lt;br&gt;&lt;font color='#555555'&gt;Blade + React 19 · Turbo · CSS&lt;br&gt;Catálogo, fichas, carrito y pago&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=13;" vertex="1" parent="b1">
+          <mxGeometry x="50" y="50" width="470" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="movil" value="&lt;b&gt;App móvil / móvil web&lt;/b&gt;&lt;br&gt;&lt;font color='#555555'&gt;Misma API desde un teléfono&lt;br&gt;Interfaz responsive (menor a 600 px)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=13;" vertex="1" parent="b1">
+          <mxGeometry x="530" y="50" width="470" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b2" value="2. CAPA API &#8212; API REST en Laravel (routes/web.php)" style="rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;verticalAlign=top;align=left;fontSize=14;fontStyle=1;fontColor=#1F3E66;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="265" width="1050" height="215" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" value="&lt;b&gt;POST&lt;/b&gt;&lt;br&gt;/carritoartesano&lt;br&gt;/agregar&lt;br&gt;&lt;font color='#555555'&gt;producto_id + cantidad&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="b2">
+          <mxGeometry x="40" y="55" width="240" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e2" value="&lt;b&gt;POST&lt;/b&gt;&lt;br&gt;/carritoartesano&lt;br&gt;/actualizar&lt;br&gt;&lt;font color='#555555'&gt;suma o resta unidades&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="b2">
+          <mxGeometry x="300" y="55" width="240" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e3" value="&lt;b&gt;GET&lt;/b&gt;&lt;br&gt;/carritoartesano&lt;br&gt;&lt;font color='#555555'&gt;lista de productos y&lt;br&gt;subtotales&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="b2">
+          <mxGeometry x="560" y="55" width="240" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e4" value="&lt;b&gt;GET&lt;/b&gt;&lt;br&gt;/pagar&lt;br&gt;&lt;font color='#555555'&gt;resumen del pedido&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="b2">
+          <mxGeometry x="820" y="55" width="200" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e5" value="&lt;font color='#1F3E66'&gt;También: ficha de producto &lt;b&gt;/mostrarproducto/{id}&lt;/b&gt;, catálogo, login y registro&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;dashed=1;" vertex="1" parent="b2">
+          <mxGeometry x="40" y="165" width="980" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b3" value="3. CAPA DE LÓGICA &#8212; controladores de Laravel en el servidor" style="rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#ffe6cc;strokeColor=#d79b00;dashed=1;verticalAlign=top;align=left;fontSize=14;fontStyle=1;fontColor=#8A4B00;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="520" width="1050" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s1" value="&lt;b&gt;CarritoController&lt;/b&gt;&lt;br&gt;&lt;font color='#555555'&gt;session('carrito') = id × cantidad&lt;br&gt;lo guarda el servidor, no el navegador&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=13;" vertex="1" parent="b3">
+          <mxGeometry x="50" y="50" width="470" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s2" value="&lt;b&gt;Total automático&lt;/b&gt;&lt;br&gt;&lt;font color='#555555'&gt;subtotal + envío $ 10.000 = total&lt;br&gt;el mismo valor en carrito y en pago&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=13;" vertex="1" parent="b3">
+          <mxGeometry x="530" y="50" width="470" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b4" value="4. CAPA DE DATOS &#8212; persistencia" style="rounded=1;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;verticalAlign=top;align=left;fontSize=14;fontStyle=1;fontColor=#8C2F2F;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="705" width="1050" height="125" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db" value="&lt;b&gt;MySQL · base de datos artcraft&lt;/b&gt;&lt;br&gt;&lt;font color='#555555'&gt;tabla productos · 24 registros&lt;br&gt;nombre, descripción, categoría, precio, imagen&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=14;fillColor=#ffffff;strokeColor=#b85450;fontSize=12;" vertex="1" parent="b4">
+          <mxGeometry x="300" y="40" width="450" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="g1" value="HTTPS · petición" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=12;fontColor=#333333;labelBackgroundColor=#ffffff;strokeColor=#666666;" edge="1" parent="1" source="web" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="g2" value="HTTPS · petición" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.75;entryY=0;fontSize=12;fontColor=#333333;labelBackgroundColor=#ffffff;strokeColor=#666666;" edge="1" parent="1" source="movil" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="g3" value="ejecuta la petición" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.3;entryY=0;fontSize=12;fontColor=#333333;labelBackgroundColor=#ffffff;strokeColor=#666666;" edge="1" parent="1" source="b2" target="b3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="g4" value="consulta SQL (Eloquent)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=12;fontColor=#333333;labelBackgroundColor=#ffffff;strokeColor=#666666;" edge="1" parent="1" source="b3" target="b4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="g5" value="carrito armado + total" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;exitX=1;exitY=0.45;entryX=1;entryY=0.6;labelBackgroundColor=#ffffff;fontSize=12;fontColor=#333333;strokeColor=#82b366;" edge="1" parent="1" source="b3" target="b2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1145" y="587.5" />
+              <mxPoint x="1145" y="394" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="g6" value="respuesta HTTP (HTML / JSON)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;exitX=1;exitY=0.3;entryX=1;entryY=0.5;labelBackgroundColor=#ffffff;fontSize=12;fontColor=#333333;strokeColor=#82b366;" edge="1" parent="1" source="b2" target="b1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1145" y="330" />
+              <mxPoint x="1145" y="155" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="nota" value="&lt;b&gt;Flujo:&lt;/b&gt; &lt;font color='#666666'&gt;agregar producto → la API lo guarda en la sesión → se calcula subtotal + envío = total → el cliente muestra el pedido → se confirma el pago.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9E6;strokeColor=#E0C96A;fontSize=12;align=left;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="845" width="1050" height="40" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

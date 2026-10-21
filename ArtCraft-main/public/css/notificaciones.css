@@ -1,0 +1,186 @@
+/* =========================================================
+   NOTIFICACIONES
+   ========================================================= */
+
+.notificaciones-pagina {
+    flex: 1;
+    width: min(900px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: clamp(24px, 4vw, 44px) 0 60px;
+}
+
+.cabecera-notificaciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.cabecera-notificaciones h2 {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: #8c1d0d;
+    color: #ffffff;
+    font-size: clamp(24px, 3vw, 30px);
+}
+
+.cabecera-notificaciones h2 i {
+    color: #ffb12d;
+}
+
+.cabecera-notificaciones p {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: #8c1d0d;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* En la página de notificaciones la barra superior no se queda fija
+   ni se coloca encima al desplazar la página. */
+body.sin-header-fijo header {
+    position: relative;
+    z-index: auto;
+}
+
+.btn-leer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 10px;
+    background: #8b2510;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-leer:hover {
+    background: #b71c1c;
+}
+
+/* ------------------------------ LISTA ------------------------------ */
+
+.lista-notificaciones {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.notificacion {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    border: 1px solid #f0dfc4;
+    box-shadow: 0 8px 20px rgba(90, 24, 7, 0.08);
+}
+
+.notificacion.sin-leer {
+    border-left: 5px solid #f3701a;
+    background: #fffdf8;
+}
+
+.icono-notificacion {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+}
+
+.tipo-producto { background: #f3701a; }
+.tipo-carrito { background: #8b2510; }
+.tipo-pedido { background: #2e7d32; }
+.tipo-mensaje { background: #6c8ebf; }
+.tipo-valoracion { background: #d9a406; }
+
+.cuerpo-notificacion {
+    flex: 1;
+    min-width: 0;
+}
+
+.cuerpo-notificacion h3 {
+    color: #5a1807;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cuerpo-notificacion p {
+    margin: 6px 0;
+    color: #7a5a45;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.cuerpo-notificacion small {
+    color: #a98f72;
+}
+
+.punto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #f3701a;
+    display: inline-block;
+}
+
+.enlace-notificacion {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #8b2510;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.enlace-notificacion:hover {
+    color: #f3701a;
+}
+
+.notificacion.vacia {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 20px;
+    color: #7a5a45;
+}
+
+.notificacion.vacia i {
+    font-size: 40px;
+    color: #d9b382;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 620px) {
+    .notificacion {
+        flex-wrap: wrap;
+    }
+
+    .enlace-notificacion {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

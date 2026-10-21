@@ -1,0 +1,161 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FBE9D0;
+}
+
+.titulo {
+  width: 100%;
+  background: #efe1cb;
+  text-align: center;
+  padding: 28px 16px;
+}
+
+.titulo h1 {
+  color: #982000;
+  font-size: 42px;
+  line-height: 1.1;
+  border-bottom: 2px solid #9e5a3a;
+  display: inline-block;
+}
+
+.titulo p {
+  color: #b44418;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.contenido {
+  display: flex;
+  gap: 24px;
+  width: min(1120px, calc(100% - 48px));
+  margin: 28px auto;
+  border: 6px solid #dca065;
+  background: #efe1cf;
+  padding: 22px;
+}
+
+.formulario {
+  flex: 1;
+  padding: 12px;
+}
+
+.formulario label {
+  display: block;
+  color: #a12800;
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+  width: 100%;
+  border: 1px solid #888;
+  padding: 12px 14px;
+  font-size: 16px;
+  background: white;
+}
+
+.formulario textarea {
+  height: 130px;
+  resize: none;
+}
+
+.subir {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 11px 20px;
+  border: 1px solid #777;
+  background: #f5f0e8;
+  color: #a12800;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  font-size: 17px;
+}
+
+.publicar {
+  display: block;
+  width: 240px;
+  height: 48px;
+  margin: 26px auto 0;
+  background: #ff8500;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.preview {
+  width: 330px;
+  background: #981d00;
+  color: white;
+  text-align: center;
+  padding: 22px;
+  position: relative;
+  min-height: auto;
+  flex-shrink: 0;
+}
+
+.preview h2 {
+  font-size: 32px;
+  margin-bottom: 18px;
+}
+
+.producto {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.preview h3 {
+  margin-top: 18px;
+  font-size: 30px;
+}
+
+.preview p {
+  margin-top: 8px;
+  font-size: 19px;
+}
+
+.vasijas {
+  width: 150px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 0.9;
+}
+@media screen and (max-width:900px) {
+  .pie-pagina .grupo-1 {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .pie-pagina .red-social {
+    justify-content: center;
+  }
+}
+
+/* ========================= RESPONSIVE ========================= */
+
+@media (max-width: 800px) {
+    .contenido {
+        flex-direction: column;
+    }
+
+    .preview {
+        width: 100%;
+    }
+
+    .producto {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+}
