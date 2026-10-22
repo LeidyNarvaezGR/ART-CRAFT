@@ -3,7 +3,7 @@
         <div class="box">
             <figure>
                 <a href="{{ route('inicio') }}">
-                    <img src="{{ asset('imagenes/logo-footer-color.png') }}?v=2" alt="Logo de Art Craft">
+                    <img src="{{ asset('imagenes/logo-footer-color.png') }}?v=3" alt="Logo de Art Craft">
                 </a>
             </figure>
         </div>

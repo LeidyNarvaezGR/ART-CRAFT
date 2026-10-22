@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 
 const ENLACES_MENU = [
     ['Subir producto', 'subirProducto'],
@@ -15,12 +15,23 @@ export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito }) {
 
     const cerrarMenu = () => setMenuAbierto(false);
 
+    /** La lupa lleva al catalogo con lo que se escribio en el buscador. */
+    const buscarEnCatalogo = () => {
+        const destino = `${urls.categorias}?q=${encodeURIComponent(busqueda.trim())}`;
+
+        if (window.Turbo) {
+            window.Turbo.visit(destino);
+        } else {
+            window.location.href = destino;
+        }
+    };
+
     return (
         <header>
             <nav className="navbar">
                 <div className="logo">
                     <a href={urls.inicio} title="Art Craft">
-                        <img src={`${urls.base}/imagenes/logo-color.png?v=2`} alt="Logo de Art Craft" />
+                        <img src={`${urls.base}/imagenes/logo-color.png?v=3`} alt="Logo de Art Craft" />
                     </a>
                 </div>
 
@@ -30,10 +41,21 @@ export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito }) {
                         type="search"
                         value={busqueda}
                         onChange={(evento) => onBusqueda(evento.target.value)}
+                        onKeyDown={(evento) => {
+                            if (evento.key === 'Enter') buscarEnCatalogo();
+                        }}
                         placeholder="Buscar producto..."
                         aria-label="Buscar producto entre los destacados"
                     />
-                    <i className="fas fa-search"></i>
+                    <button
+                        type="button"
+                        className="btn-buscar"
+                        title="Buscar en el catálogo"
+                        aria-label="Buscar productos en el catálogo"
+                        onClick={buscarEnCatalogo}
+                    >
+                        <i className="fas fa-search"></i>
+                    </button>
                 </div>
 
                 <div className="nav-icons">

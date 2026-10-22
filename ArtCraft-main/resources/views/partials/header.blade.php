@@ -3,14 +3,16 @@
 
         <div class="logo">
             <a href="{{ route('inicio') }}" title="Art Craft">
-                <img src="{{ asset('imagenes/logo-color.png') }}?v=2" alt="Logo de Art Craft">
+                <img src="{{ asset('imagenes/logo-color.png') }}?v=3" alt="Logo de Art Craft">
             </a>
         </div>
 
         <form class="contenedor-busqueda" action="{{ route('categorias') }}" method="GET" role="search">
             <input class="search-box" type="search" name="q" value="{{ request('q') }}"
                 placeholder="Buscar producto..." aria-label="Buscar producto">
-            <i class="fas fa-search"></i>
+            <button class="btn-buscar" type="submit" title="Buscar" aria-label="Buscar productos">
+                <i class="fas fa-search"></i>
+            </button>
         </form>
 
         <div class="nav-icons">

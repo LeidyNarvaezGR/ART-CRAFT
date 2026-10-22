@@ -20,6 +20,11 @@ body > .pagina-inicio {
   flex: 1;
 }
 
+/* El contenido crece para que el pie quede siempre al final de la pagina. */
+body > *:not(header):not(footer) {
+  flex: 1 0 auto;
+}
+
 img {
   max-width: 100%;
 }
@@ -100,28 +105,44 @@ header {
   position: relative;
   flex: 1;
   display: flex;
+  align-items: center;
   justify-content: center;
+  gap: 10px;
   margin: 0 20px;
+  max-width: 720px;
 }
 
 .search-box {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   max-width: 650px;
   height: 45px;
   border: none;
   border-radius: 15px;
   outline: none;
-  padding: 0 45px 0 15px;
+  padding: 0 20px;
   font-size: 16px;
 }
 
-.contenedor-busqueda i {
-  position: absolute;
-  right: calc(50% - 325px + 20px);
-  top: 50%;
-  transform: translateY(-50%);
-  color: #000000;
-  pointer-events: none;
+.btn-buscar {
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background-color: #fdf6ec;
+  color: #8c1d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-buscar:hover {
+  background-color: #ffe2ae;
+  color: #6d1206;
 }
 
 .menu-container {
@@ -470,10 +491,7 @@ header {
     order: 3;
     flex-basis: 100%;
     margin: 8px 0 0;
-  }
-
-  .contenedor-busqueda i {
-    right: 20px;
+    max-width: 100%;
   }
 
   .logo {
