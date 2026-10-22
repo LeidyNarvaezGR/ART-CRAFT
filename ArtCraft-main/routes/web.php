@@ -17,6 +17,7 @@ Route::get('/categorias', [CatalogoController::class, 'categorias'])->name('cate
 Route::get('/bisuteria', [CatalogoController::class, 'bisuteria'])->name('bisuteria');
 Route::get('/ceramica', [CatalogoController::class, 'ceramica'])->name('ceramica');
 Route::get('/mascaras', [CatalogoController::class, 'mascaras'])->name('mascaras');
+Route::get('/buscar', [CatalogoController::class, 'busqueda'])->name('busqueda');
 
 Route::get('/mostrarproducto/{producto}', [CatalogoController::class, 'mostrarProducto'])->name('mostrar-producto');
 Route::get('/mostrarbisuteria/{producto}', [CatalogoController::class, 'mostrarBisuteria'])->name('mostrar-bisuteria');

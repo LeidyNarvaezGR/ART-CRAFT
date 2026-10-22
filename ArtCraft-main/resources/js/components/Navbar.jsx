@@ -17,7 +17,7 @@ export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito }) {
 
     /** La lupa lleva al catalogo con lo que se escribio en el buscador. */
     const buscarEnCatalogo = () => {
-        const destino = `${urls.categorias}?q=${encodeURIComponent(busqueda.trim())}`;
+        const destino = `${urls.busqueda}?q=${encodeURIComponent(busqueda.trim())}`;
 
         if (window.Turbo) {
             window.Turbo.visit(destino);
@@ -44,8 +44,8 @@ export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito }) {
                         onKeyDown={(evento) => {
                             if (evento.key === 'Enter') buscarEnCatalogo();
                         }}
-                        placeholder="Buscar producto..."
-                        aria-label="Buscar producto entre los destacados"
+                        placeholder="Buscar artesanías..."
+                        aria-label="Buscar productos"
                     />
                     <button
                         type="button"

@@ -308,7 +308,14 @@ body {
         margin-right: auto;
     }
 
-    .tabs {
+.resultados-busqueda {
+  text-align: center;
+  color: #5a1807;
+  font-size: 18px;
+  margin: 0 0 20px;
+}
+
+.tabs {
         flex-wrap: wrap;
     }
 }

@@ -7,9 +7,9 @@
             </a>
         </div>
 
-        <form class="contenedor-busqueda" action="{{ route('categorias') }}" method="GET" role="search">
+        <form class="contenedor-busqueda" action="{{ route('busqueda') }}" method="GET" role="search">
             <input class="search-box" type="search" name="q" value="{{ request('q') }}"
-                placeholder="Buscar producto..." aria-label="Buscar producto">
+                placeholder="Buscar artesanías..." aria-label="Buscar productos">
             <button class="btn-buscar" type="submit" title="Buscar" aria-label="Buscar productos">
                 <i class="fas fa-search"></i>
             </button>

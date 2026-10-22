@@ -45,6 +45,26 @@ class CatalogoController extends Controller
         ]);
     }
 
+    /** Busqueda general: revisa todas las categorias por nombre y descripcion. */
+    public function busqueda(Request $request): View
+    {
+        $texto = trim((string) $request->q);
+
+        $productos = Producto::query()
+            ->when($texto, fn ($query) => $query->where(function ($filtro) use ($texto) {
+                $filtro->where('nombre', 'like', '%'.$texto.'%')
+                    ->orWhere('descripcion', 'like', '%'.$texto.'%');
+            }))
+            ->orderBy('nombre')
+            ->get();
+
+        return view('busqueda', [
+            'productos' => $productos,
+            'categoriaActual' => 'Todas',
+            'busqueda' => $texto,
+        ]);
+    }
+
     public function mostrarProducto(Producto $producto): View
     {
         return $this->detalle($producto, 'mostrar-producto', 'categorias');

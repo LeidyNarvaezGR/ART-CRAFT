@@ -29,6 +29,7 @@ class InicioController extends Controller
                 'base' => rtrim(asset(''), '/'),
                 'inicio' => route('inicio'),
                 'categorias' => route('categorias'),
+                'busqueda' => route('busqueda'),
                 'carrito' => route('carrito'),
                 'carritoAgregar' => route('carrito.agregar'),
                 'perfil' => route('perfil-artesano'),
