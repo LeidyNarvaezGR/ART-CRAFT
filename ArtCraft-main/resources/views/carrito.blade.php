@@ -3,10 +3,14 @@
 @section('titulo', 'Carrito del artesano')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/carrito-artesano.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/carrito-artesano.css') }}?v={{ filemtime(public_path('css/carrito-artesano.css')) }}">
 @endpush
 
 @section('contenido')
+@if (session('mensaje'))
+    <p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+@endif
+
 <section class="principal">
     <div class="productos">
         <div class="encabezado-lista">

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
-use App\Support\Notificaciones;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -31,14 +30,6 @@ class CarritoController extends Controller
         $carrito[$id] = min(99, ($carrito[$id] ?? 0) + $cantidad);
 
         $request->session()->put('carrito', $carrito);
-
-        $producto = Producto::find($id);
-        Notificaciones::agregar(
-            'carrito',
-            'Producto agregado al carrito',
-            '"'.$producto->nombre.'" se sumó a tu carrito: '.$carrito[$id].' en total. Revisa tu pedido cuando quieras.',
-            route('carrito')
-        );
 
         if ($request->input('ir_a') === 'pagar') {
             return redirect()->route('pagar')

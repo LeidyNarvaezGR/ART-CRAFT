@@ -202,16 +202,6 @@ body {
   font-weight: bold;
 }
 
-@media screen and (max-width:900px) {
-  .pie-pagina .grupo-1 {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .pie-pagina .red-social {
-    justify-content: center;
-  }
-}
-
 /* ========================= RESPONSIVE ========================= */
 
 @media (max-width: 900px) {

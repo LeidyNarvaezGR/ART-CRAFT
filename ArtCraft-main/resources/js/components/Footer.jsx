@@ -11,7 +11,7 @@ export default function Footer({ urls }) {
                 <div className="box">
                     <figure>
                         <a href={urls.inicio} title="Art Craft">
-                            <img src={`${urls.base}/imagenes/logo-footer-color.png`} alt="Logo de Art Craft" />
+                            <img src={`${urls.base}/imagenes/logo-footer-color.png?v=2`} alt="Logo de Art Craft" />
                         </a>
                     </figure>
                 </div>

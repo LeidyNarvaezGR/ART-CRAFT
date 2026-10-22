@@ -3,7 +3,7 @@
 @section('titulo', 'Acceso')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/acceso.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/acceso.css') }}?v={{ filemtime(public_path('css/acceso.css')) }}">
 @endpush
 
 @section('contenido')
@@ -11,6 +11,10 @@
 
     <section class="login">
         <h2>Acceder</h2>
+
+        @if (session('mensaje'))
+<p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+        @endif
 
         @if ($errors->any())
             <ul class="errores">

@@ -3,7 +3,7 @@
 @section('titulo', 'Administrador')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/admin.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/admin.css') }}?v={{ filemtime(public_path('css/admin.css')) }}">
 @endpush
 
 @section('contenido')
@@ -15,6 +15,10 @@
             <p>Ingresa con tu cuenta para gestionar los productos de Art Craft.</p>
         </div>
 
+        @if (session('mensaje'))
+            <p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+        @endif
+
         @if ($errors->any())
             <ul class="errores">
                 @foreach ($errors->all() as $error)
@@ -23,7 +27,7 @@
             </ul>
         @endif
 
-        <form action="{{ route('admin.ingresar') }}" method="POST">
+        <form action="{{ route('admin.ingresar') }}" method="POST" data-turbo="false">
             @csrf
 
             <label for="email">Correo electrónico <span>*</span></label>
@@ -36,6 +40,8 @@
 
             <button type="submit" class="btn-admin">Ingresar al panel</button>
         </form>
+
+        <p class="demo-admin"><i class="fa-solid fa-key"></i> Demo: admin@artcraft.com / admin12345</p>
     </section>
 </main>
 @endsection

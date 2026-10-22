@@ -3,11 +3,15 @@
 @section('titulo', 'Registro de usuario')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/registro.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/registro.css') }}?v={{ filemtime(public_path('css/registro.css')) }}">
 @endpush
 
 @section('contenido')
 <h1>Crear Cuenta</h1>
+
+@if (session('mensaje'))
+<p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+@endif
 
 @if ($errors->any())
     <ul class="errores">

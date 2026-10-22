@@ -1,9 +1,9 @@
-<header>
+﻿<header>
     <nav class="navbar">
 
         <div class="logo">
             <a href="{{ route('inicio') }}" title="Art Craft">
-                <img src="{{ asset('imagenes/logo-color.png') }}" alt="Logo de Art Craft">
+                <img src="{{ asset('imagenes/logo-color.png') }}?v=2" alt="Logo de Art Craft">
             </a>
         </div>
 

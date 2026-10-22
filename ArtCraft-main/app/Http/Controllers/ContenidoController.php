@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Support\Notificaciones;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,13 +31,6 @@ class ContenidoController extends Controller
             'mensaje' => 'required|string',
         ]);
 
-        Notificaciones::agregar(
-            'mensaje',
-            'Mensaje enviado',
-            'Recibimos tu mensaje. Te responderemos pronto a tu correo.',
-            route('contacto')
-        );
-
-        return back();
+        return back()->with('mensaje', 'Mensaje enviado (demo). Gracias por escribirnos.');
     }
 }

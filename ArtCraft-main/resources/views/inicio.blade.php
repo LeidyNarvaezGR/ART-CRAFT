@@ -3,8 +3,8 @@
 @section('titulo', 'Inicio')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/inicio.css') }}">
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/componentes.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/inicio.css') }}?v={{ filemtime(public_path('css/inicio.css')) }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/componentes.css') }}?v={{ filemtime(public_path('css/componentes.css')) }}">
 @endpush
 
 @section('contenido-completo')

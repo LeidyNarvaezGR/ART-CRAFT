@@ -13,7 +13,7 @@ class EnsureAdmin
         if (! auth()->check() || auth()->user()->rol !== 'admin') {
             return redirect()
                 ->route('admin.login')
-                ->withErrors(['admin' => 'Inicia sesión como administrador para continuar.']);
+                ->with('mensaje', 'Inicia sesión como administrador para continuar.');
         }
 
         return $next($request);

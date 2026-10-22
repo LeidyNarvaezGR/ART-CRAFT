@@ -3,7 +3,7 @@
 @section('titulo', 'Subir producto')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/subir-producto.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/subir-producto.css') }}?v={{ filemtime(public_path('css/subir-producto.css')) }}">
 @endpush
 
 @section('contenido')
@@ -11,6 +11,10 @@
     <h1>Subir nuevo producto</h1>
     <p>Muestra tu arte al mundo</p>
 </section>
+
+@if (session('mensaje'))
+<p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+@endif
 
 @if ($errors->any())
     <ul class="errores">

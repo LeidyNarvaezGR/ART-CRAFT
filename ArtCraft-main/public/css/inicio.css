@@ -21,6 +21,13 @@ body {
     box-sizing: border-box;
 }
 
+#artcraft-inicio h1,
+#artcraft-inicio h2,
+#artcraft-inicio p,
+#artcraft-inicio figure {
+    margin: 0;
+}
+
 .pagina-inicio {
     flex: 1;
     display: flex;
@@ -128,7 +135,6 @@ body {
     line-height: 1.6;
     max-width: 52ch;
     margin: 0 auto;
-    text-align: center;
 }
 
 .productos {
@@ -157,12 +163,6 @@ body {
 }
 
 /* ------------------------------ RESPONSIVE ------------------------------ */
-
-@media (max-width: 900px) {
-    .pie-pagina .grupo-1 .box figure img {
-        width: 220px;
-    }
-}
 
 @media (max-width: 640px) {
     .hero {

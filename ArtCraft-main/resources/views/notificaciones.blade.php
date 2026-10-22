@@ -2,10 +2,8 @@
 
 @section('titulo', 'Notificaciones')
 
-@section('clase-cuerpo', 'sin-header-fijo')
-
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/notificaciones.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/notificaciones.css') }}?v={{ filemtime(public_path('css/notificaciones.css')) }}">
 @endpush
 
 @section('contenido')
@@ -23,7 +21,7 @@
         </div>
 
         @if ($pendientes > 0)
-            <form action="{{ route('notificaciones.leer') }}" method="POST">
+            <form action="{{ route('notificaciones.leer') }}" method="POST" data-turbo="false">
                 @csrf
                 <button type="submit" class="btn-leer">
                     <i class="fa-solid fa-check-double"></i> Marcar todas como leídas
@@ -31,6 +29,10 @@
             </form>
         @endif
     </header>
+
+    @if (session('mensaje'))
+        <p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+    @endif
 
     <ul class="lista-notificaciones">
         @forelse ($notificaciones as $notificacion)
@@ -60,7 +62,7 @@
                 </div>
 
                 @if ($notificacion['url'])
-                    <a class="enlace-notificacion" href="{{ $notificacion['url'] }}">
+                    <a class="enlace-notificacion" href="{{ $notificacion['url'] }}" data-turbo="false">
                         Ver <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 @endif

@@ -3,7 +3,7 @@
 @section('titulo', 'Perfil del artesano')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/perfil-artesano.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/perfil-artesano.css') }}?v={{ filemtime(public_path('css/perfil-artesano.css')) }}">
 @endpush
 
 @section('contenido')

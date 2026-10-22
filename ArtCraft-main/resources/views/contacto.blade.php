@@ -3,12 +3,16 @@
 @section('titulo', 'Contacto y soporte')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/contacto.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/contacto.css') }}?v={{ filemtime(public_path('css/contacto.css')) }}">
 @endpush
 
 @section('contenido')
 <h1>Contacto y soporte</h1>
 <p class="subtitulo">¡Estamos aquí para ayudarte!</p>
+
+@if (session('mensaje'))
+<p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+@endif
 
 @if ($errors->any())
     <ul class="errores">

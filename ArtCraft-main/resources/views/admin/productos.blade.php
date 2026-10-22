@@ -3,7 +3,7 @@
 @section('titulo', 'Panel de administración')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/admin.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/admin.css') }}?v={{ filemtime(public_path('css/admin.css')) }}">
 @endpush
 
 @section('contenido')
@@ -15,11 +15,11 @@
         </div>
 
         <div class="panel-acciones">
-            <a href="{{ route('inicio') }}" class="btn-panel btn-secundario">
+            <a href="{{ route('inicio') }}" class="btn-panel btn-secundario" data-turbo="false">
                 <i class="fa-solid fa-store"></i> Ver tienda
             </a>
 
-            <form action="{{ route('admin.salir') }}" method="POST">
+            <form action="{{ route('admin.salir') }}" method="POST" data-turbo="false">
                 @csrf
                 <button type="submit" class="btn-panel btn-salir">
                     <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
@@ -27,6 +27,10 @@
             </form>
         </div>
     </header>
+
+    @if (session('mensaje'))
+        <p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+    @endif
 
     <section class="tabla-admin">
         <div class="fila-admin cabecera-fila">
@@ -48,7 +52,7 @@
                 <span class="celda-precio">{{ $producto->precio_formateado }}</span>
 
                 <span class="celda-accion">
-                    <form action="{{ route('admin.eliminar', $producto) }}" method="POST"
+                    <form action="{{ route('admin.eliminar', $producto) }}" method="POST" data-turbo="false"
                         onsubmit="return confirm('¿Eliminar \"{{ $producto->nombre }}\" del catálogo?');">
                         @csrf
                         @method('DELETE')

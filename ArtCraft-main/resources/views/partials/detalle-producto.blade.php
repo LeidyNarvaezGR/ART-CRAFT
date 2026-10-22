@@ -6,6 +6,10 @@
         <i class="fa-solid fa-arrow-left"></i>
     </a>
 
+    @if (session('mensaje'))
+        <p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+    @endif
+
     <div class="seccion-superior">
         <div class="imagen-producto">
             <img src="{{ $producto->imagen_url }}" alt="{{ $producto->nombre }}">

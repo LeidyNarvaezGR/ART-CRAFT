@@ -3,7 +3,7 @@
 @section('titulo', 'Pagar')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/pagar.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/pagar.css') }}?v={{ filemtime(public_path('css/pagar.css')) }}">
 @endpush
 
 @section('contenido')
@@ -31,6 +31,10 @@
 
   <section class="order-summary">
     <h2>Tu pedido</h2>
+
+    @if (session('mensaje'))
+      <p class="alerta alerta-exito">{{ session('mensaje') }}</p>
+    @endif
 
     <table>
       <tr>

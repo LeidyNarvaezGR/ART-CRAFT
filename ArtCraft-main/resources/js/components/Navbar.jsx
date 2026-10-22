@@ -20,7 +20,7 @@ export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito }) {
             <nav className="navbar">
                 <div className="logo">
                     <a href={urls.inicio} title="Art Craft">
-                        <img src={`${urls.base}/imagenes/logo-color.png`} alt="Logo de Art Craft" />
+                        <img src={`${urls.base}/imagenes/logo-color.png?v=2`} alt="Logo de Art Craft" />
                     </a>
                 </div>
 

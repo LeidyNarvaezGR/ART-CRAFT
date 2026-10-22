@@ -3,7 +3,7 @@
 @section('titulo', 'Sobre nosotros')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/sobre-nosotros.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/sobre-nosotros.css') }}?v={{ filemtime(public_path('css/sobre-nosotros.css')) }}">
 @endpush
 
 @section('contenido')

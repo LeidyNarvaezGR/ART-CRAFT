@@ -1,9 +1,9 @@
 ﻿@extends('layouts.app')
 
-@section('titulo', 'Catálogo de cerámica')
+@section('titulo', 'Catálogo de bisutería')
 
 @push('estilos')
-<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/categorias.css') }}">
+<link rel="stylesheet" data-turbo-track="dynamic" href="{{ asset('css/categorias.css') }}?v={{ filemtime(public_path('css/categorias.css')) }}">
 @endpush
 
 @section('contenido')
