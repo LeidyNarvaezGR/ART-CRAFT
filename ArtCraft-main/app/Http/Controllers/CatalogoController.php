@@ -49,20 +49,76 @@ class CatalogoController extends Controller
     public function busqueda(Request $request): View
     {
         $texto = trim((string) $request->q);
+        $terminos = $this->terminos($texto);
 
-        $productos = Producto::query()
-            ->when($texto, fn ($query) => $query->where(function ($filtro) use ($texto) {
-                $filtro->where('nombre', 'like', '%'.$texto.'%')
-                    ->orWhere('descripcion', 'like', '%'.$texto.'%');
-            }))
-            ->orderBy('nombre')
-            ->get();
+        $productos = Producto::orderBy('nombre')->get();
+
+        if ($terminos) {
+            $productos = $productos
+                ->filter(function (Producto $producto) use ($terminos) {
+                    $contenido = $this->normalizar($producto->nombre.' '.$producto->descripcion.' '.$producto->categoria);
+
+                    foreach ($terminos as $termino) {
+                        if (str_contains($contenido, $termino)) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                })
+                ->values();
+        }
 
         return view('busqueda', [
             'productos' => $productos,
             'categoriaActual' => 'Todas',
             'busqueda' => $texto,
         ]);
+    }
+
+    /**
+     * Amplia la busqueda: "mochilas" tambien encuentra "Mochila ..." y la
+     * categoria "Mochilas", porque el usuario escribe en plural o sin tilde.
+     *
+     * @return list<string>
+     */
+    private function terminos(string $texto): array
+    {
+        if ($texto === '') {
+            return [];
+        }
+
+        $terminos = [$this->normalizar($texto)];
+
+        foreach (preg_split('/\s+/', $texto) as $palabra) {
+            $normal = $this->normalizar(trim($palabra));
+
+            if (mb_strlen($normal) > 3 && str_ends_with($normal, 'es')) {
+                $terminos[] = mb_substr($normal, 0, -2);
+                $terminos[] = mb_substr($normal, 0, -1);
+            } elseif (mb_strlen($normal) > 3 && str_ends_with($normal, 's')) {
+                $terminos[] = mb_substr($normal, 0, -1);
+            }
+        }
+
+        return array_values(array_unique(array_filter($terminos)));
+    }
+
+    /** Minusculas y sin tildes, para comparar "mascara" con "Máscara". */
+    private function normalizar(string $texto): string
+    {
+        $texto = mb_strtolower(trim($texto));
+
+        $letras = [
+            'á' => 'a', 'à' => 'a', 'ä' => 'a', 'â' => 'a',
+            'é' => 'e', 'è' => 'e', 'ë' => 'e', 'ê' => 'e',
+            'í' => 'i', 'ì' => 'i', 'ï' => 'i', 'î' => 'i',
+            'ó' => 'o', 'ò' => 'o', 'ö' => 'o', 'ô' => 'o',
+            'ú' => 'u', 'ù' => 'u', 'ü' => 'u', 'û' => 'u',
+            'ñ' => 'n', 'ç' => 'c',
+        ];
+
+        return strtr($texto, $letras);
     }
 
     public function mostrarProducto(Producto $producto): View

@@ -44,6 +44,26 @@ class BusquedaTest extends TestCase
             ->assertSee('No encontramos productos con el nombre');
     }
 
+    public function test_encuentra_tambien_en_singular_y_por_categoria(): void
+    {
+        // "mochilas" (plural) debe encontrar los productos "Mochila ...".
+        $this->get('/buscar?q=mochilas')
+            ->assertOk()
+            ->assertSee('Mochila Azul con Borlas');
+
+        // Y "mascaras" debe encontrar la categoria "Máscaras".
+        $this->get('/buscar?q=mascaras')
+            ->assertOk()
+            ->assertSee('Máscara Doble Tono');
+    }
+
+    public function test_las_imagenes_que_no_existen_caen_a_un_marcador(): void
+    {
+        $producto = Producto::factory()->create(['imagen' => 'no-existe-esta-foto.jpg']);
+
+        $this->assertStringContainsString('sin-imagen.png', $producto->imagen_url);
+    }
+
     public function test_el_buscador_del_encabezado_manda_a_la_busqueda_global(): void
     {
         $html = $this->get('/categorias')->assertOk()->getContent();
