@@ -130,11 +130,12 @@ body {
 }
 
 .intro-destacados {
-    color: #5a1807;
-    font-size: clamp(16px, 2vw, 20px);
-    line-height: 1.6;
-    max-width: 52ch;
-    margin: 0 auto;
+  color: #5a1807;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .productos {

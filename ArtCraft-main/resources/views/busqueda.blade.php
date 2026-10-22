@@ -8,11 +8,15 @@
 
 @section('contenido')
 <section class="categorias">
-    <h2>Buscar productos</h2>
+    <div class="busqueda-cabecera">
+        <h2>Buscar productos</h2>
 
-    @if (! empty($busqueda))
-        <p class="resultados-busqueda">{{ count($productos) }} {{ count($productos) === 1 ? 'producto' : 'productos' }} para “{{ $busqueda }}”.</p>
-    @endif
+        @if (! empty($busqueda))
+            <p class="resultados-busqueda">{{ count($productos) }} {{ count($productos) === 1 ? 'producto' : 'productos' }} para “{{ $busqueda }}”.</p>
+        @else
+            <p class="resultados-busqueda">Escribe en el buscador del encabezado para encontrar mochilas, bisutería, cerámica o máscaras.</p>
+        @endif
+    </div>
 
     @include('partials.tabs-categorias')
     @include('partials.grid-productos')

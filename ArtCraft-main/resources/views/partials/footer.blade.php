@@ -1,4 +1,4 @@
-﻿<footer class="pie-pagina">
+<footer class="pie-pagina">
     <div class="grupo-1">
         <div class="box">
             <figure>

@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('titulo', 'Inicio')
 
@@ -10,10 +10,10 @@
 @section('contenido-completo')
 <div
     id="artcraft-inicio"
-    data-destacados="{{ json_encode($destacados) }}"
-    data-categorias="{{ json_encode($categorias) }}"
-    data-urls="{{ json_encode($urls) }}"
-    data-carrito-ids="{{ json_encode(array_keys(session('carrito', []))) }}"
+    data-destacados="{{ json_encode($destacados, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}"
+    data-categorias="{{ json_encode($categorias, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}"
+    data-urls="{{ json_encode($urls, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}"
+    data-carrito-ids="{{ json_encode(array_keys(session('carrito', [])), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}"
 >
     <noscript>
         <p class="alerta">Esta portada necesita JavaScript activado para funcionar.</p>

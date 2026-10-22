@@ -1,4 +1,4 @@
-﻿const REDES = [
+const REDES = [
     ['fa-facebook-f', 'Facebook'],
     ['fa-instagram', 'Instagram'],
     ['fa-youtube', 'YouTube'],

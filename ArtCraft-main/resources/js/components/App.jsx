@@ -7,7 +7,7 @@ import { useFiltroProductos } from '../hooks/useFiltroProductos';
 
 export default function App({ destacados, categorias, urls }) {
     const carrito = useCarrito(urls.carritoAgregar);
-    const filtro = useFiltroProductos(destacados, categorias);
+    const filtro = useFiltroProductos(destacados, categorias, urls.apiCatalogo);
 
     return (
         <>
@@ -29,6 +29,8 @@ export default function App({ destacados, categorias, urls }) {
                     onLimpiar={filtro.limpiar}
                     hayFiltros={filtro.hayFiltros}
                     total={filtro.total}
+                    esCategoria={filtro.esCategoria}
+                    cargando={filtro.cargando}
                     carrito={carrito}
                     urls={urls}
                 />
