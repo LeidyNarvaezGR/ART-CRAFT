@@ -18,6 +18,24 @@
 </head>
 
 <body>
+    @php
+        $archivosJs = [];
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(resource_path('js'))) as $archivo) {
+            if ($archivo->isFile()) {
+                $archivosJs[] = $archivo->getPathname();
+            }
+        }
+        $codigoReciente = $archivosJs ? max(array_map('filemtime', $archivosJs)) : 0;
+        $manifiesto = public_path('build/manifest.json');
+        $bundleViejo = is_file($manifiesto) && filemtime($manifiesto) < $codigoReciente;
+    @endphp
+
+    @if ($bundleViejo)
+        <div class="aviso-build">
+            El bundle de React est&aacute; desactualizado: ejecuta <code>npm run build</code> y recarga la p&aacute;gina.
+        </div>
+    @endif
+
     @if (View::hasSection('contenido-completo'))
         @yield('contenido-completo')
     @else
