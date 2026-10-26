@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('titulo', 'Perfil del artesano')
 
@@ -12,13 +12,17 @@
     <div class="banner-capa"></div>
 
     <div class="banner-content">
-        <p class="banner-etiqueta">Perfil verificado</p>
+        <p class="banner-etiqueta">{{ $esArtesano ? 'Tu perfil de artesano' : 'Perfil verificado' }}</p>
         <h1>Perfil del Artesano</h1>
-        <h2 class="artisan-name">María Gómez</h2>
+        <h2 class="artisan-name">{{ $nombre }}</h2>
         <p class="artisan-location"><i class="fa-solid fa-location-dot"></i> Artesana de Nariño</p>
+
+        @if ($email)
+            <p class="artisan-email"><i class="fa-solid fa-envelope"></i> {{ $email }}</p>
+        @endif
     </div>
 
-    <img src="{{ asset('imagenes/Artesana.png') }}" alt="María Gómez" class="banner-retrato">
+    <img src="{{ asset('imagenes/Artesana.png') }}" alt="{{ $nombre }}" class="banner-retrato">
 </section>
 
 <main class="info-container">

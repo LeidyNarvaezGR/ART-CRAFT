@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Notificaciones;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -18,24 +20,82 @@ class AuthController extends Controller
         return view('registro');
     }
 
-    public function login(Request $request): RedirectResponse
+    public function login(Request $request): RedirectResponse|JsonResponse
     {
-        $request->validate([
-            'usuario' => 'required|string',
-            'password' => 'required|string',
+        $datos = $request->validate([
+            'usuario' => ['required', 'string'],
+            'password' => ['required', 'string'],
+            'tipo' => ['nullable', 'in:cliente,artesano'],
         ]);
 
-        return back()->with('mensaje', 'Formulario de acceso recibido (demo).');
+        $usuario = (string) $datos['usuario'];
+        $rol = $datos['tipo'] ?? 'cliente';
+        $email = filter_var($usuario, FILTER_VALIDATE_EMAIL) ? $usuario : null;
+        $nombre = $email ? ucfirst(strstr($usuario, '@', true)) : $usuario;
+
+        $request->session()->put('usuario', [
+            'nombre' => $nombre,
+            'email' => $email,
+            'rol' => $rol,
+        ]);
+
+        Notificaciones::registrar(
+            'cuenta',
+            'Sesión iniciada',
+            'Ingresaste como '.$usuario.' ('.($rol === 'artesano' ? 'artesano' : 'cliente').').',
+            route('inicio')
+        );
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'ok' => true,
+                'usuario' => $usuario,
+                'rol' => $rol,
+            ]);
+        }
+
+        return back()->with('mensaje', 'Sesión iniciada correctamente (demo).');
     }
 
-    public function registrar(Request $request): RedirectResponse
+    public function registrar(Request $request): RedirectResponse|JsonResponse
     {
-        $request->validate([
-            'nombre' => 'required|string|max:120',
-            'email' => 'required|email',
-            'password' => 'required|min:8',
+        $datos = $request->validate([
+            'nombre' => ['required', 'string', 'max:120'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
+            'tipo' => ['nullable', 'in:cliente,artesano'],
         ]);
 
-        return back()->with('mensaje', 'Formulario de registro recibido (demo).');
+        $rol = $datos['tipo'] ?? 'cliente';
+
+        $request->session()->put('usuario', [
+            'nombre' => $datos['nombre'],
+            'email' => $datos['email'],
+            'rol' => $rol,
+        ]);
+
+        Notificaciones::registrar(
+            'cuenta',
+            'Cuenta creada',
+            'Tu cuenta de Art Craft quedó lista, '.$datos['nombre'].' ('.($rol === 'artesano' ? 'artesano' : 'cliente').').',
+            route('inicio')
+        );
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'ok' => true,
+                'usuario' => $datos['nombre'],
+                'rol' => $rol,
+            ]);
+        }
+
+        return back()->with('mensaje', 'Cuenta creada correctamente (demo).');
+    }
+
+    public function salir(Request $request): RedirectResponse
+    {
+        $request->session()->forget('usuario');
+
+        return back()->with('mensaje', 'Sesión cerrada.');
     }
 }

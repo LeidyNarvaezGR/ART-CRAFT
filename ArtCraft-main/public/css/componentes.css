@@ -156,6 +156,7 @@
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(90, 40, 10, 0.12);
     transition: transform 0.25s, box-shadow 0.25s;
+    text-align: center;
 }
 
 .producto:hover {
@@ -185,7 +186,7 @@
 }
 
 .categoria-producto {
-    align-self: flex-start;
+    align-self: center;
     padding: 3px 10px;
     border-radius: 20px;
     background: #f6dfc4;

@@ -16,6 +16,14 @@ function idsDelServidor() {
     }
 }
 
+/** Avisos pendientes que ya existen en la sesión al cargar la portada. */
+function notificacionesDelServidor() {
+    const contenedor = document.getElementById('artcraft-inicio');
+    const pendientes = Number(contenedor?.dataset.notificaciones || 0);
+
+    return Number.isFinite(pendientes) ? pendientes : 0;
+}
+
 /**
  * Carrito de la portada. Además de estado en React, guarda los ids en la
  * sesión de Laravel con fetch, para que /carritoartesano y /pagar muestren
@@ -23,6 +31,7 @@ function idsDelServidor() {
  */
 export function useCarrito(urlAgregar) {
     const [ids, setIds] = useState(idsDelServidor);
+    const [notificaciones, setNotificaciones] = useState(notificacionesDelServidor);
 
     const guardarEnSesion = useCallback(
         (id) => {
@@ -35,7 +44,16 @@ export function useCarrito(urlAgregar) {
                 method: 'POST',
                 headers: { 'X-CSRF-TOKEN': token, Accept: 'application/json' },
                 body: datos,
-            });
+            })
+                .then((respuesta) => (respuesta.ok ? respuesta.json() : null))
+                .then((datosRespuesta) => {
+                    const pendientes = Number(datosRespuesta?.pendientes);
+
+                    if (Number.isFinite(pendientes)) {
+                        setNotificaciones(pendientes);
+                    }
+                })
+                .catch(() => {});
         },
         [urlAgregar],
     );
@@ -58,5 +76,6 @@ export function useCarrito(urlAgregar) {
         ids,
         yaAgregado: (id) => ids.includes(id),
         agregar,
+        notificaciones,
     };
 }

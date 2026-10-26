@@ -43,6 +43,7 @@
                         @case('carrito') fa-cart-shopping @break
                         @case('pedido') fa-truck @break
                         @case('mensaje') fa-envelope @break
+                        @case('cuenta') fa-user @break
                         @case('valoracion') fa-star @break
                         @default fa-bell
                     @endswitch"></i>

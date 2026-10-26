@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('titulo', 'Carrito del artesano')
 
@@ -101,7 +101,7 @@
         <h2>Resumen del pedido</h2>
 
         <div class="fila">
-            <span>Productos ({{ $unidades }}):span>
+            <span>Productos ({{ $unidades }}):</span>
             <span>$ {{ number_format($subtotal, 0, ',', '.') }}</span>
         </div>
 
@@ -116,7 +116,7 @@
         </div>
 
         @if ($filas)
-            <a href="{{ route('pagar') }}" class="pagar">
+            <a href="{{ route('pagar') }}" class="pagar" data-requiere-acceso>
                 <i class="fa-solid fa-credit-card"></i> Ir a pagar
             </a>
 

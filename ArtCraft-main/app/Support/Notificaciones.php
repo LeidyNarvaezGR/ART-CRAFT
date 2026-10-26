@@ -2,70 +2,45 @@
 
 namespace App\Support;
 
-use App\Models\Producto;
+use Illuminate\Support\Carbon;
 
 class Notificaciones
 {
+    /** Máximo de avisos que se conservan en la sesión. */
+    private const MAXIMO = 20;
+
+    /**
+     * Guarda un aviso generado por una acción real de la persona.
+     * No se crean notificaciones de ejemplo ni automáticas.
+     */
+    public static function registrar(string $tipo, string $titulo, string $detalle, ?string $url = null): void
+    {
+        $items = session('notificaciones', []);
+
+        array_unshift($items, [
+            'id' => $tipo.'-'.now()->getTimestampMs().'-'.substr(md5(uniqid('', true)), 0, 6),
+            'tipo' => $tipo,
+            'titulo' => $titulo,
+            'detalle' => $detalle,
+            'fecha' => now()->toIso8601String(),
+            'url' => $url,
+        ]);
+
+        session(['notificaciones' => array_slice($items, 0, self::MAXIMO)]);
+    }
+
+    /** @return array<int, array<string, mixed>> */
     public static function todas(): array
     {
-        $items = [];
-
-        foreach (Producto::orderByDesc('id')->take(3)->get() as $producto) {
-            $items[] = [
-                'id' => 'producto-'.$producto->id,
-                'tipo' => 'producto',
-                'titulo' => 'Nuevo producto publicado',
-                'detalle' => '"'.$producto->nombre.'" ya está disponible en '.$producto->categoria.'.',
-                'fecha' => $producto->created_at ?? now(),
-                'url' => $producto->url,
-            ];
-        }
-
-        $carrito = session('carrito', []);
-        if ($carrito !== []) {
-            $items[] = [
-                'id' => 'carrito',
-                'tipo' => 'carrito',
-                'titulo' => 'Tu carrito te espera',
-                'detalle' => 'Tienes '.array_sum($carrito).' artículos guardados en el carrito de compras.',
-                'fecha' => now(),
-                'url' => route('carrito'),
-            ];
-        }
-
-        $items[] = [
-            'id' => 'pedido-1024',
-            'tipo' => 'pedido',
-            'titulo' => 'Pedido despachado',
-            'detalle' => 'Tu pedido #1024 salió del taller y va en camino a Popayán.',
-            'fecha' => now()->subDay(),
-            'url' => null,
-        ];
-
-        $items[] = [
-            'id' => 'mensaje-1',
-            'tipo' => 'mensaje',
-            'titulo' => 'María Gómez respondió tu mensaje',
-            'detalle' => 'Gracias por escribirnos: te contestamos por correo en menos de 24 horas.',
-            'fecha' => now()->subDays(2),
-            'url' => route('contacto'),
-        ];
-
-        $items[] = [
-            'id' => 'valoracion-1',
-            'tipo' => 'valoracion',
-            'titulo' => 'Nueva valoración: 5 estrellas',
-            'detalle' => 'Una compradora valoró "Mochila wayuu" con la máxima calificación.',
-            'fecha' => now()->subDays(3),
-            'url' => null,
-        ];
-
+        $items = session('notificaciones', []);
         $leidas = session('notificaciones_leidas', []);
 
-        foreach ($items as &$item) {
+        $items = array_map(function (array $item) use ($leidas): array {
+            $item['fecha'] = Carbon::parse($item['fecha']);
             $item['leida'] = in_array($item['id'], $leidas, true);
-        }
-        unset($item);
+
+            return $item;
+        }, $items);
 
         usort($items, fn (array $a, array $b) => $b['fecha']->getTimestamp() <=> $a['fecha']->getTimestamp());
 
@@ -75,5 +50,11 @@ class Notificaciones
     public static function pendientes(): int
     {
         return count(array_filter(self::todas(), fn (array $n) => ! $n['leida']));
+    }
+
+    /** Elimina los avisos guardados en la sesión actual. */
+    public static function limpiar(): void
+    {
+        session()->forget(['notificaciones', 'notificaciones_leidas']);
     }
 }

@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('titulo', 'Acceso')
 
@@ -26,6 +26,12 @@
 
         <form action="{{ route('login') }}" method="POST">
             @csrf
+
+            <label for="tipo">Ingresar como <span>*</span></label>
+            <select id="tipo" name="tipo">
+                <option value="cliente">Cliente / Comprador</option>
+                <option value="artesano">Artesano / Creador</option>
+            </select>
 
             <label for="usuario">Nombre de usuario o correo electrónico <span>*</span></label>
             <input type="text" id="usuario" name="usuario" value="{{ old('usuario') }}">

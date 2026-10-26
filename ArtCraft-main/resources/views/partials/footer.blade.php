@@ -1,9 +1,10 @@
-﻿<footer class="pie-pagina">
+<footer class="pie-pagina">
     <div class="grupo-1">
         <div class="box">
             <figure>
-                <a href="{{ route('inicio') }}">
-                    <img src="{{ asset('imagenes/logo-footer-color.png') }}?v=3" alt="Logo de Art Craft">
+                <a href="{{ route('inicio') }}" title="Art Craft">
+                    <img class="logo-footer" src="{{ asset('imagenes/logo-artcraft.png') }}?v=4"
+                        alt="Art Craft - Manos que crean, historias que inspiran">
                 </a>
             </figure>
         </div>

@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('titulo', 'Subir producto')
 
@@ -60,11 +60,84 @@
 
     <div class="preview">
         <h2>Vista Previa</h2>
-        <img src="{{ asset('imagenes/Mochila.jpg') }}" alt="Mochila Wayuu" class="producto">
-        <h3>Mochila Wayuu</h3>
-        <p>Precio: $450.000</p>
-        <p>Categoría: Tejidos</p>
+
+        <div class="preview-vacia" id="preview-vacia">
+            <i class="fa-regular fa-image"></i>
+            <p>Tu imagen aparecerá aquí cuando la subas.</p>
+        </div>
+
+        <img id="preview-imagen" class="producto" alt="Vista previa del producto" hidden>
+
+        <h3 id="preview-nombre" hidden></h3>
+        <p id="preview-precio" hidden></p>
+        <p id="preview-categoria" hidden></p>
     </div>
 
 </section>
 @endsection
+
+@push('scripts')
+<script>
+    (function () {
+        const campoImagen = document.getElementById('imagen');
+        const imagen = document.getElementById('preview-imagen');
+        const vacia = document.getElementById('preview-vacia');
+        const nombre = document.getElementById('preview-nombre');
+        const precio = document.getElementById('preview-precio');
+        const categoria = document.getElementById('preview-categoria');
+        const campoNombre = document.getElementById('nombre');
+        const campoPrecio = document.getElementById('precio');
+        const campoCategoria = document.getElementById('categoria');
+
+        /** La imagen solo se muestra cuando la persona elige un archivo. */
+        campoImagen.addEventListener('change', function () {
+            const archivo = campoImagen.files && campoImagen.files[0];
+
+            if (!archivo) {
+                imagen.hidden = true;
+                imagen.removeAttribute('src');
+                vacia.hidden = false;
+                return;
+            }
+
+            imagen.src = URL.createObjectURL(archivo);
+            imagen.hidden = false;
+            vacia.hidden = true;
+        });
+
+        /** Los datos de la vista previa aparecen a medida que se escriben. */
+        function actualizarTexto(elemento, valor, prefijo) {
+            const texto = (valor || '').trim();
+
+            if (texto === '') {
+                elemento.hidden = true;
+                elemento.textContent = '';
+                return;
+            }
+
+            elemento.textContent = prefijo + texto;
+            elemento.hidden = false;
+        }
+
+        campoNombre.addEventListener('input', function () {
+            actualizarTexto(nombre, campoNombre.value, '');
+        });
+
+        campoPrecio.addEventListener('input', function () {
+            if (campoPrecio.value === '') {
+                precio.hidden = true;
+                precio.textContent = '';
+                return;
+            }
+
+            const valor = Number(campoPrecio.value);
+            precio.textContent = 'Precio: $ ' + valor.toLocaleString('es-CO');
+            precio.hidden = false;
+        });
+
+        campoCategoria.addEventListener('change', function () {
+            actualizarTexto(categoria, campoCategoria.value, 'Categoría: ');
+        });
+    })();
+</script>
+@endpush

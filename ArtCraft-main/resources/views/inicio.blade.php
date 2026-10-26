@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('titulo', 'Inicio')
 
@@ -14,6 +14,7 @@
     data-categorias="{{ json_encode($categorias) }}"
     data-urls="{{ json_encode($urls) }}"
     data-carrito-ids="{{ json_encode(array_keys(session('carrito', []))) }}"
+    data-notificaciones="{{ (int) $notificacionesPendientes }}"
 >
     <noscript>
         <p class="alerta">Esta portada necesita JavaScript activado para funcionar.</p>

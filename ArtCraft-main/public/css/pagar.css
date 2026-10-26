@@ -4,42 +4,88 @@ body {
   background-color: #fcefdc;
 }
 
+/* ------------------------- PÁGINA DE PAGO ------------------------- */
+
+.pago-pagina {
+  width: 100%;
+  padding: clamp(24px, 4vw, 40px) 20px 56px;
+}
+
+.pago-cabecera {
+  max-width: 980px;
+  margin: 0 auto 26px;
+  text-align: center;
+}
+
+.pago-cabecera h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(26px, 3.4vw, 38px);
+  line-height: 1.1;
+  color: #5a1807;
+}
+
+.pago-cabecera p {
+  margin-top: 8px;
+  color: #8a5c42;
+  font-size: 16px;
+}
+
+.pago-alerta {
+  max-width: 980px;
+  margin: 0 auto 20px;
+}
+
 .checkout-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  background-color: #fcefdc;
-  border-radius: 10px;
-  padding: 40px 50px;
-  max-width: 1100px;
-  margin: 40px auto;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  align-items: start;
+  gap: 22px;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
   font-family: "Georgia", serif;
   box-sizing: border-box;
 }
 
-.billing-details {
-  flex: 1 1 48%;
+.billing-details,
+.order-summary {
   background-color: #fff8ee;
   border-radius: 12px;
-  padding: 30px;
+  padding: 24px;
   border: 1px solid #d6bfa5;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
+  min-width: 0;
 }
 
-.billing-details h2 {
-  font-size: 24px;
+.billing-details h2,
+.order-summary h2 {
+  font-size: 21px;
   color: #5a1807;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
   font-weight: bold;
   text-align: center;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 14px;
+}
+
+.campo {
+  min-width: 0;
+}
+
+.campo-ancho {
+  grid-column: 1 / -1;
 }
 
 .billing-details label,
 .payment-section label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
+  font-size: 13.5px;
   font-weight: bold;
   color: #5a1807;
   text-align: left;
@@ -48,11 +94,11 @@ body {
 .billing-details input,
 .payment-section input {
   width: 100%;
-  padding: 12px;
+  padding: 10px 12px;
   border: 1px solid #c5bba3;
-  border-radius: 6px;
-  margin-bottom: 15px;
-  font-size: 15px;
+  border-radius: 7px;
+  margin-bottom: 13px;
+  font-size: 14.5px;
   background-color: #fff;
   color: #5a1807;
   outline: none;
@@ -63,38 +109,22 @@ body {
 .billing-details input:focus,
 .payment-section input:focus {
   border-color: #8b2510;
-  box-shadow: 0 0 6px rgba(139, 37, 16, 0.3);
+  box-shadow: 0 0 6px rgba(139, 37, 16, 0.25);
 }
 
-.order-summary {
-  flex: 1 1 48%;
-  background-color: #fff8ee;
-  border-radius: 12px;
-  padding: 30px;
-  border: 1px solid #d6bfa5;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  box-sizing: border-box;
-}
-
-.order-summary h2 {
-  font-size: 24px;
-  color: #5a1807;
-  margin-bottom: 25px;
-  font-weight: bold;
-  text-align: center;
-}
+/* ------------------------- RESUMEN DEL PEDIDO ------------------------- */
 
 .order-summary table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .order-summary th,
 .order-summary td {
   text-align: left;
-  padding: 10px 0;
-  font-size: 16px;
+  padding: 8px 0;
+  font-size: 14.5px;
   color: #5a1807;
 }
 
@@ -106,38 +136,40 @@ body {
   white-space: nowrap;
 }
 
-.volcar-carrito {
-  display: inline-block;
-  margin-bottom: 20px;
-  color: #b33800;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
 .order-summary th {
   font-weight: bold;
   border-bottom: 1px solid #d6bfa5;
 }
 
+.volcar-carrito {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #b33800;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .order-summary .total {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: bold;
   color: #8b2510;
   text-align: right;
-  margin-top: 10px;
-  margin-bottom: 25px;
+  margin-top: 6px;
+  margin-bottom: 18px;
 }
 
+/* ------------------------- MÉTODOS DE PAGO ------------------------- */
+
 .payment-methods {
-  margin-top: 20px;
+  margin-top: 16px;
   border-top: 1px dashed #d6bfa5;
-  padding-top: 20px;
+  padding-top: 16px;
 }
 
 .payment-methods h3 {
-  font-size: 20px;
+  font-size: 18px;
   color: #5a1807;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   font-weight: bold;
   text-align: left;
 }
@@ -148,8 +180,7 @@ input[type="radio"][name="metodo-pago"] {
 
 .tabs {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #c5bba3;
@@ -157,10 +188,10 @@ input[type="radio"][name="metodo-pago"] {
 
 .tab-label {
   flex: 1;
-  padding: 12px 5px;
-  background: #eeeecb;
+  padding: 9px 4px;
+  background: #f3ead7;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: bold;
   text-align: center;
   border-right: 1px solid #c5bba3;
@@ -174,7 +205,7 @@ input[type="radio"][name="metodo-pago"] {
 }
 
 .tab-label:hover {
-  background: #d6bfa5;
+  background: #e3d3b7;
 }
 
 #tab-tarjeta:checked ~ .tabs .label-tarjeta,
@@ -188,7 +219,7 @@ input[type="radio"][name="metodo-pago"] {
   display: none;
   background-color: #fff8ee;
   border-radius: 10px;
-  padding: 15px 5px;
+  padding: 6px 2px;
 }
 
 #tab-tarjeta:checked ~ .payment-content .seccion-tarjeta,
@@ -199,49 +230,50 @@ input[type="radio"][name="metodo-pago"] {
 
 .payment-section p,
 .payment-section li {
-  font-size: 15px;
+  font-size: 14.5px;
   color: #5a1807;
-  line-height: 1.6;
+  line-height: 1.55;
   text-align: left;
 }
 
 .payment-section ul {
-  margin: 10px 0 15px 20px;
+  margin: 8px 0 12px 18px;
   padding: 0;
 }
 
 .card-logos-inline {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   justify-content: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .card-logos-inline img {
-  height: 30px;
+  height: 26px;
   width: auto;
 }
 
 .expiry {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .expiry input {
   flex: 1;
+  min-width: 0;
 }
 
 .pay-btn {
   width: 100%;
-  padding: 16px;
+  padding: 14px;
   background-color: #f2650d;
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 25px;
+  margin-top: 18px;
   transition: background 0.3s ease;
 }
 
@@ -249,30 +281,62 @@ input[type="radio"][name="metodo-pago"] {
   background-color: #d4580b;
 }
 
-@media (max-width: 900px) {
+.pago-volver {
+  max-width: 980px;
+  margin: 22px auto 0;
+  text-align: center;
+}
+
+.pago-volver a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #7a5a45;
+  font-size: 14.5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.pago-volver a:hover {
+  color: #8b2510;
+}
+
+/* ------------------------- RESPONSIVE ------------------------- */
+
+@media (max-width: 860px) {
   .checkout-container {
-    flex-direction: column;
-    padding: 20px;
+    grid-template-columns: 1fr;
   }
 
   .billing-details,
   .order-summary {
-    width: 100%;
+    padding: 22px;
   }
-  
+}
+
+@media (max-width: 520px) {
+  .pago-pagina {
+    padding: 22px 14px 44px;
+  }
+
+  .campos {
+    grid-template-columns: 1fr;
+  }
+
+  .campo-ancho {
+    grid-column: auto;
+  }
+
   .tabs {
     flex-direction: column;
   }
-  
+
   .tab-label {
     border-right: none;
     border-bottom: 1px solid #c5bba3;
   }
-}
 
-.nequi:hover {
-  background-color: #b71c1c;
-  color: white;
-  transform: translateY(-3px);
+  .tab-label:last-child {
+    border-bottom: none;
+  }
 }
-

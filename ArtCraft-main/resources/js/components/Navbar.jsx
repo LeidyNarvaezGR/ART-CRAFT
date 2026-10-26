@@ -7,11 +7,16 @@ const ENLACES_MENU = [
     ['Contacto y soporte', 'contacto'],
     ['Nosotros', 'nosotros'],
     ['Categoría', 'categorias'],
-    ['Administrador', 'admin'],
 ];
 
-export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito }) {
+const tokenCsrf = () => document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito, totalNotificaciones = 0 }) {
     const [menuAbierto, setMenuAbierto] = useState(false);
+
+    const esArtesano = urls.rol === 'artesano';
+    const perfilUrl = esArtesano ? urls.perfil : urls.miPerfil || urls.perfil;
+    const perfilTitulo = esArtesano ? 'Perfil del artesano' : 'Mi perfil';
 
     const cerrarMenu = () => setMenuAbierto(false);
 
@@ -30,8 +35,16 @@ export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito }) {
         <header>
             <nav className="navbar">
                 <div className="logo">
-                    <a href={urls.inicio} title="Art Craft">
-                        <img src={`${urls.base}/imagenes/logo-color.png?v=3`} alt="Logo de Art Craft" />
+                    <a href={urls.inicio} title="Art Craft" aria-label="Art Craft - Inicio">
+                        <img
+                            className="logo-icono"
+                            src={`${urls.base}/imagenes/logo-icono.png?v=4`}
+                            alt="Icono de Art Craft"
+                        />
+                        <span className="logo-texto">
+                            <span className="logo-nombre">Art Craft</span>
+                            <span className="logo-lema">Manos que crean, historias que inspiran</span>
+                        </span>
                     </a>
                 </div>
 
@@ -59,12 +72,21 @@ export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito }) {
                 </div>
 
                 <div className="nav-icons">
-                    <a href={urls.perfil} title="Mi perfil">
-                        <i className="fa-solid fa-user"></i>
-                    </a>
+                    {urls.autenticado ? (
+                        <a href={perfilUrl} title={perfilTitulo}>
+                            <i className="fa-solid fa-user"></i>
+                        </a>
+                    ) : (
+                        <a href={urls.acceso} title="Iniciar sesión" data-abrir-acceso>
+                            <i className="fa-solid fa-user"></i>
+                        </a>
+                    )}
 
-                    <a href={urls.notificaciones} title="Notificaciones">
+                    <a href={urls.notificaciones} title="Notificaciones" className="campana-icono">
                         <i className="fa-solid fa-bell"></i>
+                        {totalNotificaciones > 0 && (
+                            <span className="contador-notificaciones">{totalNotificaciones}</span>
+                        )}
                     </a>
 
                     <a href={urls.carrito} title="Carrito de compras" className="carrito-icono">
@@ -92,6 +114,32 @@ export default function Navbar({ urls, busqueda, onBusqueda, totalCarrito }) {
                                     {texto}
                                 </a>
                             ))}
+
+                            {urls.autenticado ? (
+                                <div className="menu-usuario">
+                                    <span className="menu-usuario-nombre">
+                                        <i className="fa-solid fa-circle-user"></i> {urls.usuario}
+                                    </span>
+
+                                    <span className="menu-usuario-rol">
+                                        <i className={`fa-solid ${esArtesano ? 'fa-palette' : 'fa-bag-shopping'}`}></i>{' '}
+                                        {esArtesano ? 'Artesano' : 'Cliente'}
+                                    </span>
+
+                                    <a href={perfilUrl} onClick={cerrarMenu}>
+                                        {perfilTitulo}
+                                    </a>
+
+                                    <form action={urls.salir} method="POST">
+                                        <input type="hidden" name="_token" value={tokenCsrf()} />
+                                        <button type="submit">Cerrar sesión</button>
+                                    </form>
+                                </div>
+                            ) : (
+                                <a href={urls.acceso} data-abrir-acceso onClick={cerrarMenu}>
+                                    Iniciar sesión
+                                </a>
+                            )}
                         </div>
                     </div>
                 </div>

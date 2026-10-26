@@ -47,12 +47,15 @@ span {
   color: #a52a2a;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], select {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #999;
   border-radius: 4px;
+  background: #fff;
+  font-size: 14px;
+  color: #333;
 }
 
 .password-field {
@@ -129,6 +132,7 @@ input[type="text"], input[type="password"] {
   transition: background-color 0.3s ease;
   margin-left: 0; 
   display: inline-block; 
+  text-decoration: none;
 }
 
 .btn-registrarse:hover {

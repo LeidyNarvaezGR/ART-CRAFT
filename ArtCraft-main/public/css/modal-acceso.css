@@ -1,0 +1,256 @@
+/* =========================================================
+   VENTANA DE ACCESO (modal)
+   ========================================================= */
+
+body.sin-scroll {
+  overflow: hidden;
+}
+
+.modal-acceso {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-acceso[hidden] {
+  display: none;
+}
+
+.modal-acceso__fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 17, 11, 0.62);
+  backdrop-filter: blur(3px);
+}
+
+.modal-acceso__caja {
+  position: relative;
+  width: min(420px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: #fffaf0;
+  border: 1px solid rgba(70, 42, 30, 0.18);
+  border-radius: 16px;
+  padding: 26px 26px 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  transform: translateY(14px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.modal-acceso.abierto .modal-acceso__caja {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.modal-acceso__cerrar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #f1e4cd;
+  color: var(--marca-marron);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.modal-acceso__cerrar:hover {
+  background: var(--marca-ambar);
+  color: var(--marca-marron-oscuro);
+}
+
+.modal-acceso__marca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 34px;
+  margin-bottom: 20px;
+}
+
+.modal-acceso__marca img {
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--marca-ambar-claro);
+}
+
+.modal-acceso__marca h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  line-height: 1.2;
+  color: var(--marca-marron);
+}
+
+.modal-acceso__marca p {
+  margin-top: 4px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: #7a5a45;
+}
+
+.modal-acceso__rol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.modal-acceso__rol button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 6px;
+  border: 1px solid #d8c6b0;
+  border-radius: 9px;
+  background: #fff;
+  color: #7a5a45;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.modal-acceso__rol button:hover {
+  border-color: var(--marca-ambar);
+}
+
+.modal-acceso__rol button.activo {
+  border-color: var(--marca-marron);
+  background: var(--marca-crema);
+  color: var(--marca-marron);
+  box-shadow: 0 0 0 2px rgba(217, 166, 74, 0.22);
+}
+
+.modal-acceso__rol button i {
+  color: var(--marca-ambar);
+}
+
+.modal-acceso__rol button.activo i {
+  color: #8b2510;
+}
+
+.modal-acceso__tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 18px;
+  background: #f1e4cd;
+  border-radius: 10px;
+}
+
+.modal-acceso__tabs button {
+  padding: 9px 8px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #7a5a45;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.modal-acceso__tabs button.activo {
+  background: var(--marca-marron);
+  color: var(--marca-crema);
+}
+
+.modal-acceso__panel[hidden] {
+  display: none;
+}
+
+.modal-acceso__panel label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 13.5px;
+  font-weight: bold;
+  color: var(--marca-marron);
+}
+
+.modal-acceso__panel input {
+  width: 100%;
+  height: 42px;
+  margin-bottom: 13px;
+  padding: 0 12px;
+  border: 1px solid #d8c6b0;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--marca-marron-oscuro);
+  font-size: 15px;
+  outline: none;
+}
+
+.modal-acceso__panel input:focus {
+  border-color: var(--marca-ambar);
+  box-shadow: 0 0 0 3px rgba(217, 166, 74, 0.22);
+}
+
+.modal-acceso__error {
+  min-height: 18px;
+  margin: -4px 0 8px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #b3261e;
+}
+
+.modal-acceso__enviar {
+  width: 100%;
+  min-height: 44px;
+  border: none;
+  border-radius: 9px;
+  background: var(--marca-marron);
+  color: var(--marca-crema);
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.modal-acceso__enviar:hover:not(:disabled) {
+  background: var(--marca-ambar);
+  color: var(--marca-marron-oscuro);
+}
+
+.modal-acceso__enviar:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.modal-acceso__nota {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: #9a7b61;
+}
+
+@media (max-width: 480px) {
+  .modal-acceso {
+    padding: 12px;
+  }
+
+  .modal-acceso__caja {
+    padding: 22px 18px 16px;
+    border-radius: 14px;
+  }
+
+  .modal-acceso__marca h2 {
+    font-size: 19px;
+  }
+}

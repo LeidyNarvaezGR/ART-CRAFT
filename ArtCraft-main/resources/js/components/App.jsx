@@ -5,7 +5,7 @@ import Footer from './Footer';
 import { useCarrito } from '../hooks/useCarrito';
 import { useFiltroProductos } from '../hooks/useFiltroProductos';
 
-export default function App({ destacados, categorias, urls }) {
+export default function App({ destacados, categorias, notificaciones, urls }) {
     const carrito = useCarrito(urls.carritoAgregar);
     const filtro = useFiltroProductos(destacados, categorias);
 
@@ -16,6 +16,7 @@ export default function App({ destacados, categorias, urls }) {
                 busqueda={filtro.busqueda}
                 onBusqueda={filtro.setBusqueda}
                 totalCarrito={carrito.total}
+                totalNotificaciones={carrito.notificaciones ?? notificaciones}
             />
 
             <main className="pagina-inicio">

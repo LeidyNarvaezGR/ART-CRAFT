@@ -31,7 +31,7 @@
                 </button>
             </form>
 
-            <form class="form-accion" action="{{ route('carrito.agregar') }}" method="POST">
+            <form class="form-accion" action="{{ route('carrito.agregar') }}" method="POST" data-requiere-acceso>
                 @csrf
                 <input type="hidden" name="producto_id" value="{{ $producto->id }}">
                 <input type="hidden" name="cantidad" value="1">
@@ -41,6 +41,23 @@
                     Comprar ahora
                 </button>
             </form>
+
+            <aside class="artesano-ficha">
+                <img src="{{ asset('imagenes/Artesana.png') }}" alt="María Gómez" class="artesano-ficha__foto">
+
+                <div class="artesano-ficha__datos">
+                    <span class="artesano-ficha__etiqueta">Hecho a mano por</span>
+                    <strong class="artesano-ficha__nombre">María Gómez</strong>
+                    <span class="artesano-ficha__lugar">
+                        <i class="fa-solid fa-location-dot"></i> Nariño, Colombia
+                    </span>
+                </div>
+
+                <a href="{{ route('perfil-artesano') }}" class="artesano-ficha__link">
+                    <i class="fa-solid fa-palette"></i> Perfil del artesano
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </aside>
         </div>
     </div>
 

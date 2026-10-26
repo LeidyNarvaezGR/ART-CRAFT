@@ -11,7 +11,11 @@ export default function Footer({ urls }) {
                 <div className="box">
                     <figure>
                         <a href={urls.inicio} title="Art Craft">
-                            <img src={`${urls.base}/imagenes/logo-footer-color.png?v=3`} alt="Logo de Art Craft" />
+                            <img
+                                className="logo-footer"
+                                src={`${urls.base}/imagenes/logo-artcraft.png?v=4`}
+                                alt="Art Craft - Manos que crean, historias que inspiran"
+                            />
                         </a>
                     </figure>
                 </div>

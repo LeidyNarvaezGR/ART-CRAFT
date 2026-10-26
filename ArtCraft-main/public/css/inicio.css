@@ -21,10 +21,9 @@ body {
     box-sizing: border-box;
 }
 
-#artcraft-inicio h1,
-#artcraft-inicio h2,
-#artcraft-inicio p,
-#artcraft-inicio figure {
+/* Reinicio de márgenes sin ganarle en especificidad a las clases:
+   así los márgenes automáticos que centran los textos sí se aplican. */
+:where(#artcraft-inicio) :where(h1, h2, p, figure) {
     margin: 0;
 }
 
@@ -135,6 +134,7 @@ body {
     line-height: 1.6;
     max-width: 52ch;
     margin: 0 auto;
+    text-align: center;
 }
 
 .productos {

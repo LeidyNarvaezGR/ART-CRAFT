@@ -115,6 +115,43 @@ body {
   border: 2px solid white;
 }
 
+.producto[hidden],
+.preview h3[hidden],
+.preview p[hidden],
+.preview-vacia[hidden] {
+  display: none;
+}
+
+.preview-vacia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 220px;
+  padding: 24px 18px;
+  border: 2px dashed rgba(255, 255, 255, 0.45);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.preview-vacia i {
+  font-size: 44px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.preview-vacia p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.preview h2 + .preview-vacia,
+.preview h2 + .producto {
+  margin-top: 4px;
+}
+
 .preview h3 {
   margin-top: 18px;
   font-size: 30px;

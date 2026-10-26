@@ -20,6 +20,7 @@ const leerDatos = () => {
     return {
         destacados: leer('destacados', []),
         categorias: leer('categorias', []),
+        notificaciones: leer('notificaciones', 0),
         urls: leer('urls', {}),
     };
 };

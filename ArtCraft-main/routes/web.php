@@ -8,6 +8,7 @@ use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\ContenidoController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\NotificacionesController;
+use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
@@ -40,8 +41,10 @@ Route::get('/acceso', [AuthController::class, 'acceso'])->name('acceso');
 Route::post('/acceso', [AuthController::class, 'login'])->name('login');
 Route::get('/registrousuario', [AuthController::class, 'registro'])->name('registro');
 Route::post('/registrousuario', [AuthController::class, 'registrar'])->name('registrar');
+Route::post('/salir', [AuthController::class, 'salir'])->name('salir');
 
 Route::get('/perfilartesano', [ArtesanoController::class, 'perfil'])->name('perfil-artesano');
+Route::get('/miperfil', [PerfilController::class, 'cliente'])->name('mi-perfil');
 Route::get('/subirproducto', [ArtesanoController::class, 'subirProducto'])->name('subir-producto');
 Route::post('/subirproducto', [ArtesanoController::class, 'guardarProducto'])->name('guardar-producto');
 
