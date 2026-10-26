@@ -321,8 +321,22 @@ body > header,
   display: flex;
 }
 
-/* --------------------------- FOOTER ---------------------------- */
+.aviso-build {
+  background: #b71c1c;
+  color: #fff6e4;
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 15px;
+}
 
+.aviso-build code {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-family: Consolas, monospace;
+}
+
+/* --------------------------- FOOTER ---------------------------- */
 .pie-pagina {
   width: 100%;
   background-color: var(--marca-marron);

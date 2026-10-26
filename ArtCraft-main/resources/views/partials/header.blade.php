@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 @php
     $usuarioActual = session('usuario');
     $esArtesano = is_array($usuarioActual) && ($usuarioActual['rol'] ?? 'cliente') === 'artesano';
 @endphp
+=======
+>>>>>>> 8d6b72e39265d088f871e6003b1ddf477b295010
 <header>
     <nav class="navbar">
 

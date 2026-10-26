@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 Route::get('/inicio', [InicioController::class, 'index']);
+Route::get('/api/catalogo', [InicioController::class, 'catalogo'])->name('api.catalogo');
 
 Route::get('/categorias', [CatalogoController::class, 'categorias'])->name('categorias');
 Route::get('/bisuteria', [CatalogoController::class, 'bisuteria'])->name('bisuteria');

@@ -18,8 +18,30 @@
     @stack('estilos')
 </head>
 
+<<<<<<< HEAD
 <body data-autenticado="{{ session()->has('usuario') ? '1' : '0' }}"
     @if (session('abrir_acceso')) data-abrir-acceso="1" @if (session('destino_acceso')) data-destino="{{ session('destino_acceso') }}" @endif @endif>
+=======
+<body>
+    @php
+        $archivosJs = [];
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(resource_path('js'))) as $archivo) {
+            if ($archivo->isFile()) {
+                $archivosJs[] = $archivo->getPathname();
+            }
+        }
+        $codigoReciente = $archivosJs ? max(array_map('filemtime', $archivosJs)) : 0;
+        $manifiesto = public_path('build/manifest.json');
+        $bundleViejo = is_file($manifiesto) && filemtime($manifiesto) < $codigoReciente;
+    @endphp
+
+    @if ($bundleViejo)
+        <div class="aviso-build">
+            El bundle de React est&aacute; desactualizado: ejecuta <code>npm run build</code> y recarga la p&aacute;gina.
+        </div>
+    @endif
+
+>>>>>>> 8d6b72e39265d088f871e6003b1ddf477b295010
     @if (View::hasSection('contenido-completo'))
         @yield('contenido-completo')
     @else

@@ -315,6 +315,26 @@ body {
   margin: 0 0 20px;
 }
 
+.busqueda-cabecera {
+  background: #8c1d0d;
+  border-radius: 16px;
+  padding: 26px 24px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.busqueda-cabecera h2 {
+  color: #ffcf70;
+  margin: 0 0 10px;
+  font-size: 32px;
+}
+
+.busqueda-cabecera .resultados-busqueda {
+  color: #fdf3e3;
+  font-size: 17px;
+  margin: 0;
+}
+
 .tabs {
         flex-wrap: wrap;
     }

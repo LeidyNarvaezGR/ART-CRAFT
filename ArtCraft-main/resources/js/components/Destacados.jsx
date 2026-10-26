@@ -8,13 +8,25 @@ export default function Destacados({
     onLimpiar,
     hayFiltros,
     total,
+    esCategoria,
+    cargando,
     carrito,
     urls,
-}) {    return (
+}) {
+    const rutas = {
+        Mochilas: urls.categorias,
+        'Bisutería': urls.categorias,
+        Cerámica: urls.categorias,
+        Máscaras: urls.categorias,
+    };
+
+    return (
         <section className="destacados" id="destacados">
-            <h2>Destacados del mes</h2>
+            <h2>{esCategoria ? categoria : 'Destacados del mes'}</h2>
             <p className="intro-destacados">
-                Descubre las piezas artesanales más admiradas por nuestros visitantes.
+                {esCategoria
+                    ? `Piezas artesanales de ${categoria.toLowerCase()} hechas a mano por nuestras artesanas.`
+                    : 'Descubre las piezas artesanales más admiradas por nuestros visitantes.'}
             </p>
 
             <div className="filtros-categoria">
@@ -34,13 +46,27 @@ export default function Destacados({
                 </span>
             </div>
 
-            {productos.length === 0 ? (
+            {cargando ? (
+                <div className="sin-resultados">
+                    <i className="fa-solid fa-spinner fa-spin"></i>
+                    <p>Cargando productos…</p>
+                </div>
+            ) : productos.length === 0 ? (
                 <div className="sin-resultados">
                     <i className="fa-solid fa-magnifying-glass"></i>
-                    <p>No hay productos que coincidan con la búsqueda.</p>
+                    <p>
+                        {esCategoria
+                            ? `No hay productos para mostrar en ${categoria}.`
+                            : 'No hay productos que coincidan con la búsqueda.'}
+                    </p>
                     <button type="button" className="boton-chico boton-principal" onClick={onLimpiar}>
-                        Quitar filtros
+                        {esCategoria ? 'Ver los destacados' : 'Quitar filtros'}
                     </button>
+                    {esCategoria && (
+                        <a href={rutas[categoria] || urls.categorias} className="boton-chico boton-principal">
+                            Ir al catálogo
+                        </a>
+                    )}
                 </div>
             ) : (
                 <>

@@ -10,11 +10,18 @@
 @section('contenido-completo')
 <div
     id="artcraft-inicio"
+<<<<<<< HEAD
     data-destacados="{{ json_encode($destacados) }}"
     data-categorias="{{ json_encode($categorias) }}"
     data-urls="{{ json_encode($urls) }}"
     data-carrito-ids="{{ json_encode(array_keys(session('carrito', []))) }}"
     data-notificaciones="{{ (int) $notificacionesPendientes }}"
+=======
+    data-destacados="{{ json_encode($destacados, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}"
+    data-categorias="{{ json_encode($categorias, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}"
+    data-urls="{{ json_encode($urls, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}"
+    data-carrito-ids="{{ json_encode(array_keys(session('carrito', [])), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}"
+>>>>>>> 8d6b72e39265d088f871e6003b1ddf477b295010
 >
     <noscript>
         <p class="alerta">Esta portada necesita JavaScript activado para funcionar.</p>
