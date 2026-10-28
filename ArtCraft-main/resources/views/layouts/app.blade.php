@@ -16,13 +16,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @stack('estilos')
+
+    {{-- Paleta elegante: se carga al final para unificar botones, logo y pie. --}}
+    <link rel="stylesheet" href="{{ asset('css/elegante.css') }}?v={{ filemtime(public_path('css/elegante.css')) }}">
 </head>
 
-<<<<<<< HEAD
 <body data-autenticado="{{ session()->has('usuario') ? '1' : '0' }}"
     @if (session('abrir_acceso')) data-abrir-acceso="1" @if (session('destino_acceso')) data-destino="{{ session('destino_acceso') }}" @endif @endif>
-=======
-<body>
     @php
         $archivosJs = [];
         foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(resource_path('js'))) as $archivo) {
@@ -40,8 +40,6 @@
             El bundle de React est&aacute; desactualizado: ejecuta <code>npm run build</code> y recarga la p&aacute;gina.
         </div>
     @endif
-
->>>>>>> 8d6b72e39265d088f871e6003b1ddf477b295010
     @if (View::hasSection('contenido-completo'))
         @yield('contenido-completo')
     @else

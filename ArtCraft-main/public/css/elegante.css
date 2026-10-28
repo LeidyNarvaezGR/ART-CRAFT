@@ -1,0 +1,832 @@
+/* =========================================================
+   TEMA ELEGANTE — Art Craft
+   Capa final de color para botones, cajas destacadas,
+   logo y pie de página. Se carga después de los estilos
+   de cada página para mantener una sola paleta.
+   ========================================================= */
+
+:root {
+    --ele-espresso: #2c1a12;
+    --ele-espresso-2: #3a2419;
+    --ele-cacao: #4a2f21;
+    --ele-cacao-claro: #5b3a28;
+    --ele-oro: #c3a05e;
+    --ele-oro-claro: #ddc38c;
+    --ele-oro-oscuro: #a07c42;
+    --ele-crema: #f8efe0;
+    --ele-crema-2: #f3e7d2;
+    --ele-texto: #3a2419;
+    --ele-texto-suave: #6f5544;
+    --ele-exito: #5d6b51;
+    --ele-error: #8c3b2e;
+}
+
+/* ---------------------------- LOGO ---------------------------- */
+
+.logo img.logo-icono {
+    background-color: var(--ele-espresso);
+    border-color: rgba(195, 160, 94, 0.65);
+    box-shadow: 0 3px 10px rgba(42, 24, 17, 0.28);
+}
+
+.logo-nombre {
+    color: #f6ead4;
+}
+
+.logo-lema {
+    color: var(--ele-oro);
+}
+
+/* ------------------------- CONTADORES ------------------------- */
+
+.contador-carrito,
+.contador-notificaciones {
+    background: var(--ele-oro);
+    color: var(--ele-espresso);
+}
+
+/* --------------------- BOTONES DE LA PORTADA --------------------- */
+
+.hero::before {
+    background:
+        linear-gradient(90deg, rgba(30, 18, 12, 0.93), rgba(74, 47, 33, 0.6), rgba(195, 160, 94, 0.32)),
+        linear-gradient(0deg, rgba(25, 14, 9, 0.5), rgba(25, 14, 9, 0.1));
+}
+
+.etiqueta {
+    color: var(--ele-oro-claro);
+}
+
+.contenido-hero h1 {
+    color: var(--ele-crema);
+}
+
+.contenido-hero h1 span {
+    color: var(--ele-oro-claro);
+}
+
+.descripcion {
+    color: #f1e3c9;
+}
+
+.pagina-inicio {
+    background:
+        repeating-linear-gradient(45deg, transparent 0 38px, rgba(195, 160, 94, 0.1) 38px 40px),
+        repeating-linear-gradient(90deg, transparent 0 42px, rgba(248, 239, 224, 0.06) 42px 44px),
+        linear-gradient(135deg, #1d110b, #4a2c1d);
+}
+
+.boton-principal {
+    background: linear-gradient(135deg, #dcc08a 0%, #b18c4a 100%);
+    color: var(--ele-espresso);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 20px rgba(42, 24, 17, 0.22);
+}
+
+.boton-principal:hover {
+    background: linear-gradient(135deg, #e8d3a8 0%, var(--ele-oro) 100%);
+    color: var(--ele-espresso);
+}
+
+.boton-agregar {
+    background: linear-gradient(135deg, var(--ele-cacao) 0%, var(--ele-espresso) 100%);
+    color: var(--ele-crema);
+    border: 1px solid rgba(195, 160, 94, 0.45);
+}
+
+.boton-agregar:hover {
+    background: linear-gradient(135deg, var(--ele-cacao-claro) 0%, #3a2318 100%);
+}
+
+.boton-agregar.activo {
+    background: linear-gradient(135deg, #6a7a5d 0%, #4e5b45 100%);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.boton-agregar.activo:hover {
+    background: linear-gradient(135deg, #5a6a4e 0%, #42503b 100%);
+}
+
+#artcraft-inicio .chip {
+    border-color: var(--ele-oro-oscuro);
+    background: #fbf5ea;
+    color: var(--ele-cacao);
+}
+
+#artcraft-inicio .chip:hover,
+#artcraft-inicio .chip.activo {
+    background: var(--ele-espresso-2);
+    border-color: var(--ele-espresso-2);
+    color: var(--ele-crema);
+}
+
+.categoria-producto {
+    background: #f0e2c8;
+    color: #7c5228;
+}
+
+.producto .nombre-producto {
+    color: var(--ele-texto);
+}
+
+.producto .precio-producto {
+    color: #8a5b2c;
+}
+
+.contador-carrito-resumen {
+    color: #6f4a2c;
+}
+
+.enlace-limpiar {
+    color: #7c5228;
+}
+
+.destacados h2 {
+    color: #5f3a24;
+}
+
+.destacados h2::after {
+    background: linear-gradient(90deg, var(--ele-oro-oscuro), var(--ele-oro-claro));
+}
+
+.intro-destacados {
+    color: #5c3b2a;
+}
+
+.conteo-productos {
+    color: #6f4a2c;
+}
+
+/* ------------------------- PIE DE PÁGINA ------------------------- */
+
+/* La franja superior del pie queda sobre el fondo del cuerpo en la portada. */
+body:has(.pagina-inicio) {
+    background-color: var(--ele-espresso);
+}
+
+#artcraft-inicio {
+    background-color: var(--ele-espresso);
+}
+
+.pie-pagina {
+    background: linear-gradient(180deg, #2c1a12 0%, #21120c 100%);
+    border-top-color: var(--ele-oro);
+    color: #f1e5d0;
+}
+
+.pie-pagina .grupo-1 .box figure img {
+    border-color: rgba(195, 160, 94, 0.55);
+    border-radius: 16px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+.pie-pagina .grupo-1 .box h2 {
+    color: var(--ele-oro-claro);
+}
+
+.pie-pagina .grupo-1 .box p {
+    color: #efe2cb;
+}
+
+.pie-pagina .box p i {
+    color: var(--ele-oro);
+}
+
+.pie-pagina .grupo-1 .red-social a,
+.pie-pagina .red-pagos a,
+.pie-pagina .nequi {
+    background-color: transparent;
+    color: var(--ele-oro-claro);
+    border: 1px solid rgba(195, 160, 94, 0.55);
+}
+
+.pie-pagina .grupo-1 .red-social a:hover,
+.pie-pagina .red-pagos a:hover,
+.pie-pagina .nequi:hover {
+    background-color: var(--ele-oro);
+    border-color: var(--ele-oro);
+    color: var(--ele-espresso);
+    transform: translateY(-2px);
+}
+
+.pie-pagina .grupo-2 {
+    background-color: #1b0f09;
+    color: #d9c6a8;
+}
+
+/* ------------------- BOTONES PRINCIPALES (TODAS LAS PÁGINAS) ------------------- */
+
+.publicar,
+.pay-btn,
+.pagar,
+.btn-ingresar,
+.btn-registrarse,
+.btn-admin,
+.btn-leer,
+.perfil-btn,
+.artesano-ficha__link,
+.form-accion .btn-comprar,
+.info-perfil button {
+    background: linear-gradient(135deg, var(--ele-cacao) 0%, var(--ele-espresso) 100%);
+    color: var(--ele-crema);
+    border: 1px solid rgba(195, 160, 94, 0.5);
+    box-shadow: 0 8px 18px rgba(42, 24, 17, 0.18);
+}
+
+.publicar:hover,
+.pay-btn:hover,
+.pagar:hover,
+.btn-ingresar:hover,
+.btn-registrarse:hover,
+.btn-admin:hover,
+.btn-leer:hover,
+.perfil-btn:hover,
+.artesano-ficha__link:hover,
+.form-accion .btn-comprar:hover,
+.info-perfil button:hover {
+    background: linear-gradient(135deg, var(--ele-cacao-claro) 0%, #3a2318 100%);
+    color: #fff8ec;
+    border-color: rgba(195, 160, 94, 0.75);
+}
+
+/* El botón claro del perfil conserva su contraste. */
+.perfil-btn--claro {
+    background: var(--ele-crema-2);
+    color: var(--ele-cacao);
+    border: 1px solid var(--ele-oro);
+    box-shadow: none;
+}
+
+.perfil-btn--claro:hover {
+    background: #ead9bd;
+    color: var(--ele-espresso);
+}
+
+/* ------------------------ BOTONES SECUNDARIOS ------------------------ */
+
+.btn-carrito,
+.form-accion .btn-carrito {
+    background: var(--ele-crema);
+    color: var(--ele-cacao);
+    border: 1.5px solid var(--ele-oro);
+    box-shadow: none;
+}
+
+.btn-carrito:hover,
+.form-accion .btn-carrito:hover {
+    background: var(--ele-crema-2);
+    color: var(--ele-espresso);
+    border-color: var(--ele-oro-oscuro);
+}
+
+.btn-mostrar {
+    background: linear-gradient(135deg, #dcc08a 0%, #b18c4a 100%);
+    color: var(--ele-espresso);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-mostrar:hover {
+    background: linear-gradient(135deg, #e8d3a8 0%, var(--ele-oro) 100%);
+    color: var(--ele-espresso);
+}
+
+.btn-vaciar {
+    background: var(--ele-crema);
+    border-color: var(--ele-oro);
+    color: var(--ele-cacao);
+}
+
+.btn-vaciar:hover {
+    background: var(--ele-espresso-2);
+    border-color: var(--ele-espresso-2);
+    color: var(--ele-crema);
+}
+
+.stepper-btn {
+    background: var(--ele-crema-2);
+    color: #8a5b2c;
+}
+
+.stepper-btn:hover {
+    background: var(--ele-espresso-2);
+    color: var(--ele-crema);
+}
+
+.btn-secundario {
+    background: var(--ele-crema);
+    color: var(--ele-cacao);
+    border: 2px solid var(--ele-oro);
+}
+
+.btn-salir {
+    background: var(--ele-espresso-2);
+    color: var(--ele-crema);
+}
+
+.btn-salir:hover {
+    background: var(--ele-cacao);
+}
+
+.btn-eliminar {
+    background: #f7e8e3;
+    color: var(--ele-error);
+}
+
+.btn-eliminar:hover {
+    background: var(--ele-error);
+    color: #fff;
+}
+
+.btn-registrarse {
+    background: linear-gradient(135deg, #dcc08a 0%, #b18c4a 100%);
+    color: var(--ele-espresso);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-registrarse:hover {
+    background: linear-gradient(135deg, #e8d3a8 0%, var(--ele-oro) 100%);
+    color: var(--ele-espresso);
+}
+
+.btn-facebook,
+.btn-google {
+    background: var(--ele-crema);
+    color: var(--ele-cacao);
+    border: 1px solid var(--ele-oro);
+    box-shadow: 0 6px 14px rgba(42, 24, 17, 0.1);
+}
+
+.btn-facebook:hover,
+.btn-google:hover {
+    background: var(--ele-crema-2);
+    color: var(--ele-espresso);
+    border-color: var(--ele-oro-oscuro);
+}
+
+.btn-facebook i {
+    color: #3b5998;
+}
+
+.btn-google i {
+    color: #db4437;
+}
+
+/* ------------------------ PESTAÑAS Y CHIPS ------------------------ */
+
+.tabs button {
+    background: #f6ecdb;
+    color: #5f3a24;
+    border: 1px solid #d9c3a0;
+}
+
+.tabs button:hover {
+    background: #eee0c8;
+}
+
+.tabs button.active {
+    background: var(--ele-espresso-2);
+    border-color: var(--ele-espresso-2);
+    color: var(--ele-crema);
+}
+
+/* ------------------------ SUBIR PRODUCTO ------------------------ */
+
+.titulo h1 {
+    color: #5f3a24;
+    border-bottom-color: var(--ele-oro);
+}
+
+.titulo p {
+    color: #8a5b2c;
+}
+
+.contenido {
+    border-color: #d9c3a0;
+    background: #f7eddd;
+}
+
+.formulario label {
+    color: #6f4a2c;
+}
+
+.subir {
+    background: var(--ele-crema);
+    color: #5f3a24;
+    border: 1px solid var(--ele-oro);
+    border-radius: 6px;
+}
+
+.subir:hover {
+    background: var(--ele-crema-2);
+}
+
+.preview {
+    background: linear-gradient(160deg, #3a2419 0%, #24140e 100%);
+    border-radius: 6px;
+}
+
+/* ------------------------ PAGO ------------------------ */
+
+.pago-cabecera h1,
+.billing-details h2,
+.order-summary h2,
+.payment-methods h3 {
+    color: #5f3a24;
+}
+
+.billing-details label,
+.payment-section label {
+    color: #5f3a24;
+}
+
+.billing-details input:focus,
+.payment-section input:focus {
+    border-color: var(--ele-oro);
+    box-shadow: 0 0 0 3px rgba(195, 160, 94, 0.25);
+}
+
+.tab-label {
+    background: var(--ele-crema-2);
+    color: #5f3a24;
+}
+
+.tab-label:hover {
+    background: #ead9bd;
+}
+
+#tab-tarjeta:checked ~ .tabs .label-tarjeta,
+#tab-transferencia:checked ~ .tabs .label-transferencia,
+#tab-contraentrega:checked ~ .tabs .label-contraentrega {
+    background: var(--ele-espresso-2);
+    color: var(--ele-crema);
+}
+
+.order-summary .total,
+.campo-total,
+.volcar-carrito {
+    color: #8a5b2c;
+}
+
+.pago-volver a:hover {
+    color: #8a5b2c;
+}
+
+/* ------------------------ CARRITO ------------------------ */
+
+.titulo-principal {
+    background: linear-gradient(135deg, var(--ele-cacao) 0%, var(--ele-espresso) 100%);
+    color: var(--ele-crema);
+}
+
+.productos h2,
+.resumen h2,
+.datos h2,
+.pago h2 {
+    color: #8a5b2c;
+}
+
+.conteo,
+.chip-categoria {
+    background: var(--ele-crema-2);
+    color: #7c5228;
+}
+
+.total-carrito {
+    background: var(--ele-crema-2);
+    color: #8a5b2c;
+}
+
+.seguir-comprando {
+    color: #8a5b2c;
+}
+
+.datos input:focus {
+    outline-color: var(--ele-oro);
+}
+
+.pago input {
+    accent-color: var(--ele-oro-oscuro);
+}
+
+/* ------------------------ CATÁLOGO / BÚSQUEDA ------------------------ */
+
+.categorias h2,
+.card h2 {
+    color: #5f3a24;
+}
+
+.busqueda-cabecera {
+    background: linear-gradient(135deg, #3a2419 0%, #24140e 100%);
+}
+
+.busqueda-cabecera h2 {
+    color: var(--ele-oro-claro);
+}
+
+.busqueda-cabecera .resultados-busqueda {
+    color: #f3e7d2;
+}
+
+.resultados-busqueda {
+    color: #5f3a24;
+}
+
+/* ------------------------ SOBRE NOSOTROS ------------------------ */
+
+.cuadro,
+.contenedor-cuadros .cuadro {
+    background: linear-gradient(135deg, #3a2419 0%, #24140e 100%);
+    color: #f6ead4;
+}
+
+.mision .header,
+.impacto .header {
+    background: linear-gradient(135deg, var(--ele-cacao) 0%, var(--ele-espresso) 100%);
+    color: var(--ele-crema);
+}
+
+/* ------------------------ CONTACTO ------------------------ */
+
+.contenido h1 {
+    color: #5f3a24;
+}
+
+.subtitulo {
+    color: #8a5b2c;
+}
+
+.titulo-ayuda {
+    background: linear-gradient(135deg, #3a2419 0%, #24140e 100%);
+}
+
+.cajas .formulario button {
+    background: linear-gradient(135deg, var(--ele-cacao) 0%, var(--ele-espresso) 100%);
+    color: var(--ele-crema);
+    border: 1px solid rgba(195, 160, 94, 0.5);
+    border-radius: 7px;
+}
+
+.cajas .formulario button:hover {
+    background: linear-gradient(135deg, var(--ele-cacao-claro) 0%, #3a2318 100%);
+    color: #fff8ec;
+    transform: translateY(-1px);
+}
+
+/* ------------------------ BLOG ------------------------ */
+
+.encabezado,
+.articulos h2 {
+    background: linear-gradient(135deg, #3a2419 0%, #24140e 100%);
+    color: var(--ele-crema);
+}
+
+.banner {
+    background: linear-gradient(135deg, #3a2419 0%, #24140e 100%);
+}
+
+.info-perfil h3 {
+    color: #8a5b2c;
+}
+
+/* ------------------------ ACCESO Y REGISTRO ------------------------ */
+
+.container span {
+    color: #8a5b2c;
+}
+
+.extras a {
+    color: #8a5b2c;
+}
+
+.formulario input:focus {
+    border-color: var(--ele-oro);
+}
+
+.formulario p a {
+    color: var(--ele-oro-claro);
+}
+
+body:has(.formulario[action$="/registrousuario"]) .formulario button {
+    background: linear-gradient(135deg, #dcc08a 0%, #b18c4a 100%);
+    color: var(--ele-espresso);
+    border-radius: 7px;
+}
+
+body:has(.formulario[action$="/registrousuario"]) .formulario button:hover {
+    background: linear-gradient(135deg, #e8d3a8 0%, var(--ele-oro) 100%);
+    color: var(--ele-espresso);
+}
+
+body:has(.formulario[action$="/registrousuario"]) {
+    background: linear-gradient(180deg, #2c1a12 0%, #1c100b 100%);
+}
+
+body:has(.formulario[action$="/registrousuario"]) .formulario {
+    background: rgba(58, 36, 25, 0.96);
+    border: 1px solid rgba(195, 160, 94, 0.35);
+}
+
+body:has(.formulario[action$="/registrousuario"]) .formulario h1,
+body:has(.formulario[action$="/registrousuario"]) h1 {
+    color: var(--ele-crema);
+    text-align: center;
+    padding: 28px 20px 0;
+}
+
+body:has(.formulario[action$="/registrousuario"]) .formulario label {
+    color: #f3e7d2;
+}
+
+body:has(.formulario[action$="/registrousuario"]) .formulario p {
+    color: #e6d5ba;
+}
+
+body:has(.formulario[action$="/registrousuario"]) .formulario p a {
+    color: var(--ele-oro-claro);
+}
+
+/* ------------------------ ADMIN ------------------------ */
+
+.cabecera-admin i {
+    color: var(--ele-oro-oscuro);
+}
+
+.cabecera-admin h2,
+.panel-cabecera h2 {
+    color: #5f3a24;
+}
+
+.cabecera-admin p,
+.panel-cabecera p {
+    color: var(--ele-texto-suave);
+}
+
+.tarjeta-admin form input:focus {
+    border-color: var(--ele-oro);
+}
+
+.tarjeta-admin form label span {
+    color: var(--ele-error);
+}
+
+.demo-admin i {
+    color: var(--ele-oro-oscuro);
+}
+
+.fila-admin.cabecera-fila {
+    background: var(--ele-espresso-2);
+    color: var(--ele-crema-2);
+}
+
+.celda-precio {
+    color: #8a5b2c;
+}
+
+/* ------------------------ MODAL DE ACCESO ------------------------ */
+
+.modal-acceso__rol button.activo {
+    border-color: var(--ele-oro);
+    background: var(--ele-crema);
+    color: var(--ele-cacao);
+    box-shadow: 0 0 0 2px rgba(195, 160, 94, 0.24);
+}
+
+.modal-acceso__rol button.activo i {
+    color: #8a5b2c;
+}
+
+.modal-acceso__tabs button.activo {
+    background: var(--ele-espresso-2);
+    color: var(--ele-crema);
+}
+
+.modal-acceso__enviar {
+    background: linear-gradient(135deg, var(--ele-cacao) 0%, var(--ele-espresso) 100%);
+    color: var(--ele-crema);
+}
+
+.modal-acceso__enviar:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--ele-cacao-claro) 0%, #3a2318 100%);
+    color: #fff8ec;
+}
+
+/* ------------------------ AJUSTES FINOS ------------------------ */
+
+.alerta {
+    border-left-color: var(--ele-oro-oscuro);
+}
+
+.menu-usuario-rol {
+    background: var(--ele-crema-2);
+    color: #7c5228;
+}
+
+.pago-cabecera p {
+    color: var(--ele-texto-suave);
+}
+
+.perfil-hero {
+    background: linear-gradient(120deg, #24140e 0%, #3a2419 55%, #5b3a28 100%);
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, var(--ele-cacao) 0%, var(--ele-espresso) 100%);
+    color: var(--ele-crema);
+}
+
+.info-container h3 {
+    color: #5f3a24;
+    border-bottom-color: var(--ele-oro);
+}
+
+.description {
+    color: #5f3a24;
+}
+
+.datos-artesana li {
+    background: var(--ele-crema);
+    border-color: #d9c3a0;
+    color: #5f3a24;
+}
+
+.datos-artesana i {
+    color: #8a5b2c;
+}
+
+/* ------------------------ PRODUCTO: COMENTARIOS ------------------------ */
+
+.comment-footer button,
+.btn-enviar {
+    background: linear-gradient(135deg, var(--ele-cacao) 0%, var(--ele-espresso) 100%);
+    color: var(--ele-crema);
+    border: 1px solid rgba(195, 160, 94, 0.5);
+}
+
+.comment-footer button:hover,
+.btn-enviar:hover {
+    background: linear-gradient(135deg, var(--ele-cacao-claro) 0%, #3a2318 100%);
+    color: #fff8ec;
+}
+
+.estrellas span.seleccionada {
+    color: var(--ele-oro-oscuro);
+}
+
+.product-info h1,
+.info-producto h1 {
+    color: #3a2419;
+    border-bottom-color: var(--ele-oro);
+}
+
+.product-info p,
+.info-producto p {
+    border-bottom-color: #e2d2b6;
+}
+
+.product-info h2,
+.precio,
+.score,
+.calificacion {
+    color: #8a5b2c;
+}
+
+.stars-group,
+.review-stars {
+    color: var(--ele-oro-oscuro);
+}
+
+.review-item,
+.comentario {
+    border-bottom-color: #e2d2b6;
+}
+
+.reviews h3,
+.opiniones h2 {
+    color: #5f3a24;
+}
+
+/* ------------------------ PERFIL DEL ARTESANO ------------------------ */
+
+.artisan-banner {
+    background-color: var(--ele-espresso);
+}
+
+.banner-capa {
+    background: linear-gradient(100deg, rgba(32, 18, 12, 0.94) 0%, rgba(74, 47, 33, 0.62) 55%, rgba(195, 160, 94, 0.3) 100%);
+}
+
+.banner-etiqueta {
+    background: var(--ele-oro);
+    color: var(--ele-espresso);
+}
+
+/* ------------------------ AVISO DE BUILD ------------------------ */
+
+.aviso-build {
+    background: var(--ele-espresso-2);
+    color: var(--ele-crema);
+}
+
+.perfil-btn--claro {
+    background: var(--ele-crema-2);
+}
