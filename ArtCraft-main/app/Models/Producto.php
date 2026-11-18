@@ -18,6 +18,8 @@ class Producto extends Model
         'categoria',
         'precio',
         'imagen',
+        'cloudinary_public_id',
+        'cloudinary_imagen_url',
         'ruta_detalle',
         'destacado',
     ];
@@ -32,6 +34,12 @@ class Producto extends Model
 
     public function getImagenUrlAttribute(): string
     {
+        // Si existe una imagen subida a Cloudinary, usarla directamente.
+        if ($this->cloudinary_imagen_url) {
+            return $this->cloudinary_imagen_url;
+        }
+
+        // Fallback: imagen local en public/imagenes.
         $archivo = $this->buscarImagen($this->imagen);
 
         return asset($archivo ? 'imagenes/'.$archivo : 'imagenes/sin-imagen.png');

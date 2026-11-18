@@ -55,6 +55,7 @@
     <script src="{{ asset('js/acceso-modal.js') }}?v={{ filemtime(public_path('js/acceso-modal.js')) }}" defer></script>
 
     @stack('scripts')
+    @include('partials.chatbot')
 </body>
 
 </html>

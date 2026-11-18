@@ -35,4 +35,24 @@ return [
         ],
     ],
 
+    'artcraft_api' => [
+    'url' => env('URL_SERVER_API', 'http://127.0.0.1:8001/api'),
+],
+
+'artcraft_demo' => [
+    'key' => env('ARTCRAFT_DEMO_KEY'),
+],
+   
+    /*
+    |--------------------------------------------------------------------------
+    | Cloudinary (almacenamiento de imágenes)
+    |--------------------------------------------------------------------------
+    */
+    'cloudinary' => [
+        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+        'api_key' => env('CLOUDINARY_API_KEY'),
+        'api_secret' => env('CLOUDINARY_API_SECRET'),
+        'url' => env('CLOUDINARY_URL'),
+    ],
+
 ];

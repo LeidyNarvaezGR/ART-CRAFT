@@ -8,8 +8,10 @@ use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\ContenidoController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\NotificacionesController;
+use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatbotController;
 
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 Route::get('/inicio', [InicioController::class, 'index']);
@@ -36,8 +38,22 @@ Route::post('/carritoartesano/agregar', [CarritoController::class, 'agregar'])->
 Route::post('/carritoartesano/actualizar', [CarritoController::class, 'actualizar'])->name('carrito.actualizar');
 Route::post('/carritoartesano/quitar', [CarritoController::class, 'quitar'])->name('carrito.quitar');
 Route::post('/carritoartesano/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
-Route::get('/pagar', [CarritoController::class, 'pagar'])->name('pagar');
+// Mostrar el formulario de pago
+Route::get('/pagar', [PagoController::class, 'index'])
+    ->name('pagar');
 
+// Recibir los datos de compra desde el frontend
+Route::post('/pago/crear', [PagoController::class, 'crear'])
+    ->name('pago.crear');
+
+// Mostrar el resultado de la compra
+Route::get('/pago/respuesta/{orden}', [PagoController::class, 'respuesta'])
+    ->name('pago.respuesta');
+
+// Consultar las órdenes del usuario
+Route::get('/mis-ordenes', [PagoController::class, 'misOrdenes'])
+    ->name('mis.ordenes');
+    
 Route::get('/acceso', [AuthController::class, 'acceso'])->name('acceso');
 Route::post('/acceso', [AuthController::class, 'login'])->name('login');
 Route::get('/registrousuario', [AuthController::class, 'registro'])->name('registro');
@@ -65,3 +81,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('/admin/productos', [AdminController::class, 'productos'])->name('admin.productos');
     Route::delete('/admin/productos/{producto}', [AdminController::class, 'eliminar'])->name('admin.eliminar');
 });
+
+Route::post('/chatbot/mensaje', [ChatbotController::class, 'mensaje'])
+    ->middleware('throttle:20,1')
+    ->name('chatbot.mensaje');

@@ -2,42 +2,104 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
 use App\Support\Notificaciones;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class CarritoController extends Controller
 {
-    /** Costo de envío fijo de la demo. */
     private const ENVIO = 10000;
 
-    public function index(): View
+    private function apiUrl(): string
     {
-        return view('carrito', $this->datos());
+        return rtrim(
+            config('services.artcraft_api.url', 'http://127.0.0.1:8001/api'),
+            '/'
+        );
+    }
+
+    private function catalogo(): array
+    {
+        $respuesta = Http::timeout(10)
+            ->acceptJson()
+            ->get($this->apiUrl() . '/catalogo');
+
+        if (! $respuesta->successful()) {
+            throw new \RuntimeException('No se pudo consultar el catálogo.');
+        }
+
+        $datos = $respuesta->json();
+
+        $productos = $datos['data']
+            ?? $datos['productos']
+            ?? $datos;
+
+        if (! is_array($productos)) {
+            throw new \RuntimeException('El catálogo tiene un formato inválido.');
+        }
+
+        return collect($productos)->keyBy('id')->all();
+    }
+
+    private function buscarProducto(int $id): ?array
+    {
+        return $this->catalogo()[$id] ?? null;
+    }
+
+    private function items(Request $request): array
+    {
+        return $request->session()->get('carrito', []);
+    }
+
+    public function index(Request $request): View
+    {
+        return view('carrito', $this->datos($request));
     }
 
     public function agregar(Request $request): RedirectResponse|JsonResponse
     {
         $datos = $request->validate([
-            'producto_id' => ['required', 'integer', 'exists:productos,id'],
+            'producto_id' => ['required', 'integer', 'min:1'],
             'cantidad' => ['nullable', 'integer', 'min:1', 'max:99'],
         ]);
 
         $id = (int) $datos['producto_id'];
         $cantidad = (int) ($datos['cantidad'] ?? 1);
+
+        try {
+            $producto = $this->buscarProducto($id);
+        } catch (\Throwable $e) {
+            report($e);
+
+            return $this->errorAgregar(
+                $request,
+                'No se pudo conectar con el catálogo.'
+            );
+        }
+
+        if (! $producto) {
+            return $this->errorAgregar(
+                $request,
+                'El producto no existe.'
+            );
+        }
+
         $carrito = $this->items($request);
-        $carrito[$id] = min(99, ($carrito[$id] ?? 0) + $cantidad);
-        $producto = Producto::find($id);
+
+        $carrito[$id] = min(
+            99,
+            ($carrito[$id] ?? 0) + $cantidad
+        );
 
         $request->session()->put('carrito', $carrito);
 
         Notificaciones::registrar(
             'carrito',
             'Producto agregado al carrito',
-            '"'.($producto?->nombre ?? 'El producto').'" ya está en tu carrito.',
+            '"' . $producto['nombre'] . '" ya está en tu carrito.',
             route('carrito')
         );
 
@@ -50,61 +112,67 @@ class CarritoController extends Controller
         }
 
         if ($request->input('ir_a') === 'pagar') {
-            return redirect()->route('pagar')
+            return redirect()
+                ->route('pagar')
                 ->with('mensaje', 'Producto agregado. Revisa tu pedido antes de pagar.');
         }
 
         return back()->with('mensaje', 'Producto agregado al carrito.');
     }
 
+    private function errorAgregar(
+        Request $request,
+        string $mensaje
+    ): RedirectResponse|JsonResponse {
+        if ($request->expectsJson()) {
+            return response()->json([
+                'ok' => false,
+                'error' => $mensaje,
+            ], 422);
+        }
+
+        return back()->with('mensaje', $mensaje);
+    }
+
     public function actualizar(Request $request): RedirectResponse
     {
         $datos = $request->validate([
-            'producto_id' => ['required', 'integer', 'exists:productos,id'],
+            'producto_id' => ['required', 'integer', 'min:1'],
             'cantidad' => ['required', 'integer', 'min:0', 'max:99'],
         ]);
 
         $id = (int) $datos['producto_id'];
         $cantidad = (int) $datos['cantidad'];
+
         $carrito = $this->items($request);
 
         if ($cantidad === 0) {
-            $producto = Producto::find($id);
             unset($carrito[$id]);
-
-            Notificaciones::registrar(
-                'carrito',
-                'Producto eliminado del carrito',
-                '"'.($producto?->nombre ?? 'El producto').'" se quitó de tu carrito.',
-                route('carrito')
-            );
-        } else {
+        } elseif (isset($carrito[$id])) {
             $carrito[$id] = $cantidad;
         }
 
         $request->session()->put('carrito', $carrito);
 
-        return back()->with('mensaje', $cantidad === 0 ? 'Producto eliminado del carrito.' : 'Cantidad actualizada.');
+        return back()->with(
+            'mensaje',
+            $cantidad === 0
+                ? 'Producto eliminado del carrito.'
+                : 'Cantidad actualizada.'
+        );
     }
 
     public function quitar(Request $request): RedirectResponse
     {
         $datos = $request->validate([
-            'producto_id' => ['required', 'integer', 'exists:productos,id'],
+            'producto_id' => ['required', 'integer', 'min:1'],
         ]);
 
         $carrito = $this->items($request);
-        $producto = Producto::find((int) $datos['producto_id']);
+
         unset($carrito[(int) $datos['producto_id']]);
 
         $request->session()->put('carrito', $carrito);
-
-        Notificaciones::registrar(
-            'carrito',
-            'Producto eliminado del carrito',
-            '"'.($producto?->nombre ?? 'El producto').'" se quitó de tu carrito.',
-            route('carrito')
-        );
 
         return back()->with('mensaje', 'Producto eliminado del carrito.');
     }
@@ -112,13 +180,6 @@ class CarritoController extends Controller
     public function vaciar(Request $request): RedirectResponse
     {
         $request->session()->forget('carrito');
-
-        Notificaciones::registrar(
-            'carrito',
-            'Carrito vaciado',
-            'Eliminaste todos los productos de tu carrito.',
-            route('carrito')
-        );
 
         return back()->with('mensaje', 'Carrito vaciado.');
     }
@@ -130,48 +191,67 @@ class CarritoController extends Controller
                 ->route('carrito')
                 ->with('abrir_acceso', true)
                 ->with('destino_acceso', route('pagar'))
-                ->with('mensaje', 'Inicia sesión o crea una cuenta para continuar con el pago.');
+                ->with('mensaje', 'Inicia sesión para continuar.');
         }
 
-        return view('pagar', $this->datos());
+        return redirect()->route('pagar');
     }
 
-    /** @return array<int, array{producto: Producto, cantidad: int, total: int}> */
-    private function items(Request $request): array
+    private function datos(Request $request): array
     {
-        return $request->session()->get('carrito', []);
-    }
+        $items = $this->items($request);
 
-    /** Arma la lista de productos del carrito con los totales ya calculados. */
-    private function datos(): array
-    {
-        $items = session('carrito', []);
-
-        if ($items === []) {
-            return ['filas' => [], 'subtotal' => 0, 'envio' => 0, 'total' => 0, 'unidades' => 0];
+        if (empty($items)) {
+            return [
+                'filas' => [],
+                'subtotal' => 0,
+                'envio' => 0,
+                'total' => 0,
+                'unidades' => 0,
+            ];
         }
 
-        $productos = Producto::whereIn('id', array_keys($items))->get()->keyBy('id');
+        try {
+            $productos = $this->catalogo();
+        } catch (\Throwable $e) {
+            report($e);
+
+            return [
+                'filas' => [],
+                'subtotal' => 0,
+                'envio' => 0,
+                'total' => 0,
+                'unidades' => 0,
+            ];
+        }
 
         $filas = [];
         $subtotal = 0;
         $unidades = 0;
 
         foreach ($items as $id => $cantidad) {
-            $producto = $productos->get($id);
+            $producto = $productos[$id] ?? null;
 
             if (! $producto) {
                 continue;
             }
 
-            $total = $producto->precio * $cantidad;
-            $subtotal += $total;
-            $unidades += $cantidad;
+            $producto = (object) $producto;
 
-            $filas[] = ['producto' => $producto, 'cantidad' => $cantidad, 'total' => $total];
+            $cantidad = (int) $cantidad;
+            $totalProducto = (int) $producto->precio * $cantidad;
+
+            $filas[] = [
+                'producto' => $producto,
+                'cantidad' => $cantidad,
+                'total' => $totalProducto,
+            ];
+
+            $subtotal += $totalProducto;
+            $unidades += $cantidad;
         }
 
-        $envio = $filas === [] ? 0 : self::ENVIO;
+        $envio = empty($filas) ? 0 : self::ENVIO;
 
         return [
             'filas' => $filas,

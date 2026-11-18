@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Support\Notificaciones;
+use App\Models\Producto;
+use App\Services\CloudinaryService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ArtesanoController extends Controller
 {
+    public function __construct(
+        private CloudinaryService $cloudinary,
+    ) {
+    }
+
     public function perfil(): View
     {
         $usuario = session('usuario');
@@ -23,24 +29,50 @@ class ArtesanoController extends Controller
 
     public function subirProducto(): View
     {
-        return view('subir-producto');
+        return view('subir-producto', [
+            'cloudinaryConfigurado' => $this->cloudinary->estaConfigurado(),
+        ]);
     }
 
     public function guardarProducto(Request $request): RedirectResponse
     {
-        $request->validate([
-            'nombre' => 'required|string|max:120',
-            'categoria' => 'required|string|max:60',
-            'precio' => 'required|numeric|min:1',
+        $datos = $request->validate([
+            'nombre' => ['required', 'string', 'max:120'],
+            'categoria' => ['required', 'string', 'max:60'],
+            'precio' => ['required', 'numeric', 'min:1'],
+            'descripcion' => ['required', 'string', 'max:1000'],
+            'imagen' => ['nullable', 'file', 'image', 'max:4096'], // hasta 4 MB
         ]);
 
-        Notificaciones::registrar(
-            'producto',
-            'Producto registrado',
-            '"'.$request->input('nombre').'" quedó registrado en la demo de Art Craft.',
-            route('perfil-artesano')
-        );
+        $imagenUrl = null;
+        $publicId = null;
+        $imagenNombre = $request->file('imagen') ? $request->file('imagen')->getClientOriginalName() : null;
 
-        return back()->with('mensaje', 'Producto registrado en la demo de Art Craft.');
+        // Si hay archivo y Cloudinary está configurado, subir a la nube.
+        if ($request->hasFile('imagen') && $this->cloudinary->estaConfigurado()) {
+            $subida = $this->cloudinary->subirImagen(
+                $request->file('imagen'),
+                'artcraft/productos'
+            );
+
+            if ($subida) {
+                $imagenUrl = $subida['secure_url'];
+                $publicId = $subida['public_id'];
+            }
+        }
+
+        Producto::create([
+            'nombre' => $datos['nombre'],
+            'descripcion' => $datos['descripcion'],
+            'categoria' => $datos['categoria'],
+            'precio' => (int) $datos['precio'],
+            'imagen' => $imagenNombre,
+            'cloudinary_public_id' => $publicId,
+            'cloudinary_imagen_url' => $imagenUrl,
+            'ruta_detalle' => 'mostrar-producto',
+            'destacado' => false,
+        ]);
+
+        return back()->with('mensaje', 'Producto '.$datos['nombre'].' registrado correctamente.');
     }
 }
