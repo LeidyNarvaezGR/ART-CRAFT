@@ -13,6 +13,7 @@ use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatbotController;
 
+
 Route::get('/', [InicioController::class, 'index'])->name('inicio');
 Route::get('/inicio', [InicioController::class, 'index']);
 Route::get('/api/catalogo', [InicioController::class, 'catalogo'])->name('api.catalogo');
@@ -73,15 +74,44 @@ Route::get('/sobrenosotros', [ContenidoController::class, 'sobreNosotros'])->nam
 Route::get('/notificaciones', [NotificacionesController::class, 'index'])->name('notificaciones');
 Route::post('/notificaciones/leer', [NotificacionesController::class, 'marcarLeidas'])->name('notificaciones.leer');
 
-Route::get('/admin', [AdminController::class, 'login'])->name('admin.login');
-Route::post('/admin', [AdminController::class, 'ingresar'])->name('admin.ingresar');
-Route::post('/admin/salir', [AdminController::class, 'salir'])->name('admin.salir');
 
+// ADMINISTRACIÓN ART CRAFT
+
+// Mostrar inicio de sesión
+Route::get('/admin/login', [AdminController::class, 'login'])
+    ->name('admin.login');
+
+// Procesar inicio de sesión
+Route::post('/admin/login', [AdminController::class, 'ingresar'])
+    ->name('admin.ingresar');
+
+// Rutas exclusivas del administrador
 Route::middleware('auth.admin')->group(function () {
-    Route::get('/admin/productos', [AdminController::class, 'productos'])->name('admin.productos');
-    Route::delete('/admin/productos/{producto}', [AdminController::class, 'eliminar'])->name('admin.eliminar');
+
+    // Dashboard
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+
+    // Perfil
+    Route::get('/admin/perfil', function () {
+        return view('admin.perfil');
+    })->name('admin.perfil');
+
+    // Productos
+    Route::get('/admin/productos', [AdminController::class, 'productos'])
+        ->name('admin.productos');
+
+    // Eliminar productos
+    Route::delete('/admin/productos/{producto}', [AdminController::class, 'eliminar'])
+        ->name('admin.eliminar');
+
+    // Cerrar sesión
+    Route::post('/admin/salir', [AdminController::class, 'salir'])
+        ->name('admin.salir');
 });
 
+// Chatbot
 Route::post('/chatbot/mensaje', [ChatbotController::class, 'mensaje'])
     ->middleware('throttle:20,1')
     ->name('chatbot.mensaje');

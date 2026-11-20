@@ -1,0 +1,281 @@
+
+/* DASHBOARD ADMINISTRATIVO ART CRAFT */
+
+.dashboard-admin {
+    background: #f8ead5;
+    min-height: 65vh;
+    padding: 65px 20px 90px;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.dashboard-contenedor {
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+/* ENCABEZADO */
+
+.dashboard-encabezado {
+    margin-bottom: 35px;
+}
+
+.dashboard-etiqueta {
+    display: inline-block;
+    color: #9b702d;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.dashboard-encabezado h1 {
+    color: #43291d;
+    font-size: clamp(28px, 4vw, 40px);
+    margin: 0 0 12px;
+}
+
+.dashboard-encabezado p {
+    color: #806858;
+    font-size: 17px;
+    margin: 0;
+}
+
+/* MENSAJE */
+
+.dashboard-mensaje {
+    background: #e8f4e6;
+    color: #276738;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+/* TARJETAS */
+
+.dashboard-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.dashboard-tarjeta {
+    display: block;
+    background: #ffffff;
+    border: 1px solid #ead8c1;
+    border-radius: 18px;
+    padding: 35px;
+    text-decoration: none;
+    color: #43291d;
+    box-shadow: 0 8px 25px rgba(67, 41, 29, 0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dashboard-tarjeta:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(67, 41, 29, 0.14);
+}
+
+.tarjeta-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    background: #f8ebd4;
+    color: #ae802e;
+    border-radius: 15px;
+    font-size: 27px;
+    margin-bottom: 25px;
+}
+
+.dashboard-tarjeta h2 {
+    font-size: 24px;
+    margin: 0 0 12px;
+}
+
+.dashboard-tarjeta p {
+    color: #806858;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.dashboard-tarjeta span {
+    color: #9b702d;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.dashboard-tarjeta span i {
+    margin-left: 8px;
+}
+
+/* INFORMACIÓN DE LA CUENTA */
+
+.dashboard-cuenta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #ffffff;
+    padding: 25px 30px;
+    border: 1px solid #ead8c1;
+    border-radius: 16px;
+}
+
+.cuenta-informacion {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cuenta-informacion > i {
+    color: #ad802e;
+    font-size: 30px;
+}
+
+.cuenta-informacion h3 {
+    color: #43291d;
+    font-size: 18px;
+    margin: 0 0 5px;
+}
+
+.cuenta-informacion p {
+    color: #806858;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* CERRAR SESIÓN */
+
+.btn-cerrar {
+    background: #43291d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-cerrar:hover {
+    background: #71452c;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .dashboard-admin {
+        padding: 35px 15px 55px;
+    }
+
+    .dashboard-tarjetas {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-tarjeta {
+        padding: 25px;
+    }
+
+    .dashboard-cuenta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-cerrar {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+/* PERFIL DEL ADMINISTRADOR */
+
+.perfil-admin-tarjeta {
+    background: white;
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 45px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #ead8c1;
+    box-shadow: 0 10px 30px rgba(67, 41, 29, 0.1);
+}
+
+.perfil-admin-avatar {
+    width: 100px;
+    height: 100px;
+    background: #f8ebd4;
+    color: #a97928;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 45px;
+    margin: 0 auto 20px;
+}
+
+.perfil-admin-tarjeta h2 {
+    color: #43291d;
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.perfil-admin-rol {
+    display: inline-block;
+    background: #f8ebd4;
+    color: #8a6026;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.perfil-admin-datos {
+    text-align: left;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.perfil-admin-datos div {
+    padding: 18px 0;
+    border-bottom: 1px solid #eee0ce;
+}
+
+.perfil-admin-datos strong {
+    color: #43291d;
+    font-size: 15px;
+}
+
+.perfil-admin-datos p {
+    color: #806858;
+    margin-top: 8px;
+    overflow-wrap: anywhere;
+}
+
+.perfil-admin-volver {
+    display: inline-block;
+    background: #43291d;
+    color: white;
+    text-decoration: none;
+    padding: 14px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.perfil-admin-volver:hover {
+    background: #71452c;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .perfil-admin-tarjeta {
+        padding: 25px 20px;
+    }
+}
+

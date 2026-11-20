@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function login(): View|RedirectResponse
-    {
-        if (auth()->check() && auth()->user()->rol === 'admin') {
-            return redirect()->route('admin.productos');
-        }
-
-        return view('admin.login');
+   public function login(): View|RedirectResponse
+{
+    if (Auth::check() && Auth::user()->rol === 'admin') {
+        return redirect()->route('admin.dashboard');
     }
+
+    return view('admin.login');
+}
 
     public function ingresar(Request $request): RedirectResponse
     {
@@ -44,7 +44,8 @@ class AdminController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('admin.productos')->with('mensaje', 'Bienvenido al panel de administración.');
+        return redirect()->route('admin.dashboard')
+    ->with('mensaje', 'Bienvenido al panel de administración.');
     }
 
     public function salir(Request $request): RedirectResponse
